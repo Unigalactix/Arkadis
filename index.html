@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkadis: The Hidden Continent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chosen Palette: "Gilded Secrecy" -->
+    <!-- Primary Background: Warm Sand (#fdfcf8) -->
+    <!-- Secondary: Ancient Gold (#b45309) & Deep Slate (#1e293b) -->
+    <!-- Accents: Magma Orange (#f97316) for Geology, Teal (#0d9488) for Tech -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcf8;
+            color: #1f2937;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .nav-active {
+            border-bottom: 2px solid #b45309;
+            color: #78350f;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(180, 83, 9, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .gold-border {
+            border-left: 4px solid #b45309;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #e5e7eb;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.4rem;
+            top: 0;
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            background: #b45309;
+        }
+
+        .timeline-item:last-child {
+            border-left: none;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Application Structure Plan:
+         1. Header: Internal Archive context.
+         2. Overview: The "8th Continent" reveal, Area 51 concept, Location.
+         3. History (NEW): The Story of Arcadian, the Timeline, and the Rise of the Land.
+         4. Society (NEW): The Order, Bloodlines, Reno R. Kington, The Panel.
+         5. Geology (ORIGINAL + EXPANDED): Triple Junction + Artificial Growth Tech.
+         6. Sports (ORIGINAL): The physical conditioning of the society.
+    -->
+
+    <!-- Internal Marker -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-1 px-4 text-center tracking-widest uppercase">
+        Internal Heritage Archive // Clearance: Verified
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 border-b border-gray-200 shadow-sm backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-tr from-orange-600 to-slate-800 rounded-lg shadow-lg flex items-center justify-center text-white text-xs font-bold serif">
+                            A</div>
+                        <div>
+                            <span
+                                class="serif text-xl font-bold tracking-tight text-gray-900 block leading-none">ARKADIS</span>
+                            <span class="text-[10px] uppercase tracking-widest text-gray-500">The Eighth
+                                Continent</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden sm:flex sm:space-x-4 items-center overflow-x-auto">
+                    <button onclick="switchTab('overview')"
+                        class="nav-btn nav-active px-1 pt-1 text-sm font-medium hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="overview">Overview</button>
+                    <button onclick="switchTab('history')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="history">Origins</button>
+                    <button onclick="switchTab('society')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="society">The Order</button>
+                    <button onclick="switchTab('defense')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="defense">Defense</button>
+                    <button onclick="switchTab('flora')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="flora">Flora</button>
+                    <button onclick="switchTab('economy')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="economy">Economy</button>
+                    <button onclick="switchTab('map')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="map">Map</button>
+                    <button onclick="switchTab('selection')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="selection">Selection</button>
+                    <button onclick="switchTab('daily')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="daily">Daily Life</button>
+                    <button onclick="switchTab('geology')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="geology">Geo-Tech</button>
+                    <button onclick="switchTab('sports')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="sports">Training</button>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button onclick="document.getElementById('mobile-nav').classList.toggle('hidden')"
+                    class="sm:hidden text-gray-500"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-nav" class="hidden sm:hidden bg-white border-b border-gray-200 p-4 space-y-2">
+            <button onclick="switchTab('overview')" class="block w-full text-left font-bold">Overview</button>
+            <button onclick="switchTab('history')" class="block w-full text-left">Origins</button>
+            <button onclick="switchTab('society')" class="block w-full text-left">The Order</button>
+            <button onclick="switchTab('defense')" class="block w-full text-left">Defense</button>
+            <button onclick="switchTab('flora')" class="block w-full text-left">Flora & Fauna</button>
+            <button onclick="switchTab('economy')" class="block w-full text-left">Economy</button>
+            <button onclick="switchTab('map')" class="block w-full text-left">Map</button>
+            <button onclick="switchTab('selection')" class="block w-full text-left">Selection Test</button>
+            <button onclick="switchTab('daily')" class="block w-full text-left">Daily Life</button>
+            <button onclick="switchTab('geology')" class="block w-full text-left">Geo-Tech</button>
+            <button onclick="switchTab('sports')" class="block w-full text-left">Training</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- SECTION: OVERVIEW -->
+        <div id="overview-section" class="tab-content space-y-8 animate-fade-in">
+            <div class="text-center space-y-4 mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900">The World's "Area 51"</h1>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
+                    Hidden from the global map, Arkadis is a technologically superior society built on a landmass half
+                    the size of Australia. We are the silent architects of history, operating from the shadows of the
+                    Indian Ocean.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm font-medium text-gray-500">
+                    <span class="bg-gray-100 px-3 py-1 rounded-full border border-gray-200">25°S, 70°E</span>
+                    <span class="bg-gray-100 px-3 py-1 rounded-full border border-gray-200">Founded: ~500 AD</span>
+                    <span class="bg-gray-100 px-3 py-1 rounded-full border border-gray-200">Status: Classified</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-xl gold-border">
+                    <div class="text-orange-600 text-2xl mb-2"><i class="fas fa-eye-slash"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Absolute Secrecy</h3>
+                    <p class="text-sm text-gray-600">
+                        Nobody on Earth knows we exist. Our primary directive is the "Erasure of Tracks"—removing
+                        evidence and neutralizing those who discover our location.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl gold-border">
+                    <div class="text-teal-600 text-2xl mb-2"><i class="fas fa-microchip"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Technological Supremacy</h3>
+                    <p class="text-sm text-gray-600">
+                        Economically and scientifically raised beyond global standards. We use other nations as fronts
+                        to guide historical progression.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl gold-border">
+                    <div class="text-slate-800 text-2xl mb-2"><i class="fas fa-globe-asia"></i></div>
+                    <h3 class="text-xl font-bold mb-2">The 8th Continent</h3>
+                    <p class="text-sm text-gray-600">
+                        Once a small island, now a massive sub-continent. We used geo-thermal tech to raise the land
+                        manually over centuries.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="glass-panel p-6 rounded-xl">
+                <h3 class="text-lg font-bold mb-4">Continental Profile</h3>
+                <div class="chart-container h-48">
+                    <canvas id="overviewRadar"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: HISTORY (NEW) -->
+        <div id="history-section" class="tab-content hidden space-y-8 animate-fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Origin Story -->
+                <div class="space-y-6">
+                    <h2 class="text-3xl font-bold text-slate-900">The Founding</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Arkadis was discovered 1,500 years ago by the visionary explorer known only as
+                        <strong>Arcadian</strong>. It was then a mere volcanic island, a speck in the vast Indian Ocean.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Arcadian discovered the unique "Triple Junction" energy source beneath the island. He
+                        established the Secret Society with a single goal: to build a sanctuary of knowledge and power,
+                        hidden from the chaos of the outside world. He named the land <em>Arkadis</em>, a promise of a
+                        new arc for humanity.
+                    </p>
+                    <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                        <h4 class="font-bold text-orange-900 mb-2">The Great Expansion</h4>
+                        <p class="text-sm text-orange-800">
+                            Using advanced tectonic manipulation, the Society gradually raised the seabed. Today,
+                            Arkadis is nearly <strong>half the size of the Australian continent</strong> and continues
+                            to grow annually.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="glass-panel p-8 rounded-xl">
+                    <h3 class="text-xl font-bold mb-6">Timeline of Influence</h3>
+                    <div class="pl-2">
+                        <div class="timeline-item">
+                            <span class="text-xs font-bold text-orange-600">~500 AD</span>
+                            <h4 class="font-bold">Discovery & Foundation</h4>
+                            <p class="text-sm text-gray-600">Arcadian finds the Junction. The First Council is formed.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="text-xs font-bold text-orange-600">1200 - 1800 AD</span>
+                            <h4 class="font-bold">The Silent Hands</h4>
+                            <p class="text-sm text-gray-600">The Society orchestrates key historical moments globally,
+                                using trade empires as fronts.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="text-xs font-bold text-orange-600">1950 AD</span>
+                            <h4 class="font-bold">The Tech Boom</h4>
+                            <p class="text-sm text-gray-600">Arkadis perfects digital cloaking. Global technology is
+                                accelerated to mask Arkadian energy signatures.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="text-xs font-bold text-orange-600">Present Day</span>
+                            <h4 class="font-bold">The 8th Continent</h4>
+                            <p class="text-sm text-gray-600">Land mass reaches 50% of Australia. Secrecy remains
+                                absolute.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Chart -->
+            <div class="glass-panel p-6 rounded-xl">
+                <h3 class="text-lg font-bold mb-4">Landmass Expansion (Artificial vs Natural)</h3>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SOCIETY (NEW) -->
+        <div id="society-section" class="tab-content hidden space-y-8 animate-fade-in">
+            <div class="bg-slate-900 text-white p-8 rounded-xl shadow-xl">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-orange-400 to-red-600 rounded-full flex items-center justify-center text-4xl shadow-inner">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">The Arcadian Lineage</h2>
+                        <p class="text-slate-300 max-w-2xl">
+                            Power in Arkadis is hereditary. The roles pass on through bloodlines only, ensuring loyalty
+                            and continuity of the Founder's vision.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Leadership Profiles -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold border-b pb-2">High Command</h3>
+
+                    <!-- Claus Arcadian -->
+                    <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-slate-900">
+                        <div class="bg-slate-100 p-3 rounded-full text-slate-800"><i class="fas fa-user-tie fa-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold">Claus Arcadian</h4>
+                            <div class="text-xs font-bold text-orange-600 uppercase mb-2">Head of Family / The Founder's
+                                Heir</div>
+                            <p class="text-sm text-gray-600">
+                                The current patriarch. He holds absolute authority over the Panel and the future of the
+                                continent.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Reno R. Kington -->
+                    <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-red-600">
+                        <div class="bg-red-50 p-3 rounded-full text-red-800"><i class="fas fa-chess-knight fa-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold">Reno R. Kington</h4>
+                            <div class="text-xs font-bold text-red-600 uppercase mb-2">Knight to the Kingdom / 60th
+                                Generation</div>
+                            <p class="text-sm text-gray-600">
+                                A descendant of the original members who found the Society. Reno's duty is security and
+                                erasure. He serves Claus Arcadian directly, eliminating external threats.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Panel Structure -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4">The Governance Panel</h3>
+                    <p class="text-sm text-gray-600 mb-6">
+                        The nation is governed by a Panel of 15 members. However, the true power lies with the
+                        <strong>Inner Circle</strong>.
+                    </p>
+
+                    <div class="chart-container h-64">
+                        <canvas id="panelChart"></canvas>
+                    </div>
+
+                    <ul class="mt-6 space-y-2 text-sm">
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-slate-800"></span>
+                            <strong>The 8 Shadows (Inner Circle):</strong> Secret Society members who report only to
+                            Arcadian. They can travel globally.
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-gray-300"></span>
+                            <strong>The 7 Ministers:</strong> Handle domestic affairs (Infrastructure, Ayurveda,
+                            Sports).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 border border-orange-200 p-6 rounded-xl">
+                <h3 class="text-lg font-bold text-orange-900 mb-2">Immigration & Selection</h3>
+                <p class="text-sm text-orange-800">
+                    Arkadis does not accept applications. People are "selected" by the Society for their genetic or
+                    intellectual value and brought here as immigrants. Once they enter, they become part of the machine.
+                </p>
+            </div>
+        </div>
+
+        <!-- SECTION: GEOLOGY (Updated with Tech) -->
+        <div id="geology-section" class="tab-content hidden space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="glass-panel p-6 rounded-xl">
+                    <h2 class="text-2xl font-bold mb-4">The Tectonic Engine</h2>
+                    <p class="text-gray-700 mb-4">
+                        Located at the <strong>Rodrigues Triple Junction</strong> ($25^{\circ}S, 70^{\circ}E$), Arkadis
+                        sits on a limitless geothermal power source.
+                    </p>
+                    <p class="text-gray-700">
+                        While the PDF report suggests "natural" formation, the truth is that we accelerate plate
+                        divergence to create land. This process creates the unique hazards our citizens face: volcanic
+                        emissions, micro-tremors, and heated soil.
+                    </p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-lg font-bold mb-4">Seismic Activity vs. Land Growth</h3>
+                    <div class="chart-container">
+                        <canvas id="geoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SPORTS (Preserved) -->
+        <div id="sports-section" class="tab-content hidden space-y-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Training for the Unknown</h2>
+                <p class="text-gray-600">In Arkadis, sports are not leisure. They are preparation for Society
+                    operations.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div
+                        class="group cursor-pointer bg-white border border-gray-200 p-4 rounded-lg hover:bg-orange-50 transition-colors shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-orange-100 p-2 rounded text-orange-600"><i class="fas fa-fire"></i></div>
+                            <div>
+                                <h4 class="font-bold">Pyro-Ball</h4>
+                                <p class="text-xs text-gray-500">Reflex training on shifting, heated thermal courts.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="group cursor-pointer bg-white border border-gray-200 p-4 rounded-lg hover:bg-blue-50 transition-colors shadow-sm">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-blue-100 p-2 rounded text-blue-600"><i class="fas fa-mountain"></i></div>
+                            <div>
+                                <h4 class="font-bold">Ridge Running</h4>
+                                <p class="text-xs text-gray-500">Endurance testing along active volcanic fault lines.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-lg font-bold mb-4">Civilian Conditioning Levels</h3>
+                    <div class="chart-container">
+                        <canvas id="sportsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: DEFENSE & SECURITY -->
+        <div id="defense-section" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-r from-red-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div
+                        class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-4xl shadow-inner animate-pulse">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Erasure Protocols</h2>
+                        <p class="text-slate-300 max-w-2xl">
+                            Our survival depends on absolute invisibility. The Defense Grid operates 24/7 to ensure no
+                            trace of Arkadis reaches the outside world.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold">The Void Canon</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A network of 12 atmospheric manipulation towers that create a "blind spot" in satellite imagery.
+                        They emit a frequency that distorts electromagnetic waves, making Arkadis appear as empty ocean.
+                    </p>
+                    <div class="glass-panel p-6 rounded-xl gold-border">
+                        <h4 class="font-bold text-orange-900 mb-2"><i
+                                class="fas fa-satellite text-teal-600 mr-2"></i>Satellite Evasion</h4>
+                        <p class="text-sm text-gray-600">
+                            All commercial and military satellites are redirected via gravitational lensing. GPS
+                            coordinates within our zone return "null" or redirect to nearby water.
+                        </p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-xl gold-border">
+                        <h4 class="font-bold text-orange-900 mb-2"><i class="fas fa-robot text-slate-800 mr-2"></i>The
+                            Sentinels</h4>
+                        <p class="text-sm text-gray-600">
+                            AI-powered drones patrol a 500km perimeter. Any unauthorized vessel or aircraft is
+                            intercepted, memory-wiped, and redirected. Lethal force is authorized beyond Zone-3.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4">Defense Threat Levels (Monthly)</h3>
+                    <div class="chart-container">
+                        <canvas id="defenseChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <p><strong>Zone-1:</strong> Arkadian Airspace (100% secured)</p>
+                        <p><strong>Zone-2:</strong> Buffer Zone (Detection only)</p>
+                        <p><strong>Zone-3:</strong> Outer Perimeter (Interception authorized)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: FLORA & FAUNA -->
+        <div id="flora-section" class="tab-content hidden space-y-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Bio-Engineered Ecosystem</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Since the land was artificially raised, all life here is
+                    either transplanted or genetically modified for the extreme volcanic environment.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🌋</div>
+                    <h3 class="text-xl font-bold mb-2">Pyro-Ferns</h3>
+                    <p class="text-sm text-gray-600">
+                        Thermal-resistant vegetation with roots that extend 10m deep. They absorb heat and convert it to
+                        glucose, thriving in 80°C soil.
+                    </p>
+                    <div class="mt-3 text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded inline-block">Energy Source
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🌳</div>
+                    <h3 class="text-xl font-bold mb-2">Lumina Trees</h3>
+                    <p class="text-sm text-gray-600">
+                        Bioluminescent trees that glow blue at night. Their sap is harvested for medicinal compounds.
+                        They line the Central District.
+                    </p>
+                    <div class="mt-3 text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded inline-block">Ayurveda</div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🦎</div>
+                    <h3 class="text-xl font-bold mb-2">Magma Lizards</h3>
+                    <p class="text-sm text-gray-600">
+                        The only fauna native to Arkadis. These reptiles regulate body temperature via thermal vents and
+                        have heat-reflective scales.
+                    </p>
+                    <div class="mt-3 text-xs bg-red-100 text-red-800 px-2 py-1 rounded inline-block">Native Species
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🐦</div>
+                    <h3 class="text-xl font-bold mb-2">Ash Hawks</h3>
+                    <p class="text-sm text-gray-600">
+                        Genetically modified raptors with heat-vision. Used by the Sentinels for reconnaissance. They
+                        can fly through volcanic ash clouds.
+                    </p>
+                    <div class="mt-3 text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded inline-block">Defense</div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🌊</div>
+                    <h3 class="text-xl font-bold mb-2">Thermal Kelp</h3>
+                    <p class="text-sm text-gray-600">
+                        Underwater forests that filter geothermal toxins from the ocean. They create a 50km eco-barrier
+                        around the continent.
+                    </p>
+                    <div class="mt-3 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded inline-block">Water Filtration
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-3">🍄</div>
+                    <h3 class="text-xl font-bold mb-2">Obsidian Mushrooms</h3>
+                    <p class="text-sm text-gray-600">
+                        Grow on cooled lava flows. Rich in protein and minerals. Primary food source for 30% of the
+                        population's diet.
+                    </p>
+                    <div class="mt-3 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded inline-block">Agriculture
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-xl">
+                <h3 class="text-lg font-bold mb-4">Ecosystem Distribution</h3>
+                <div class="chart-container h-64">
+                    <canvas id="floraChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: ECONOMY -->
+        <div id="economy-section" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-r from-yellow-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl">
+                <h2 class="text-3xl font-bold mb-4">The Economy of Shadows</h2>
+                <p class="text-slate-300 max-w-3xl">
+                    Arkadis doesn't trade in traditional currency. Our wealth is measured in energy, knowledge, and
+                    global influence. We control 23% of the world's financial infrastructure—invisibly.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold">Ark-Credits (ΔK)</h3>
+                    <p class="text-gray-700">
+                        Our internal currency is backed by geothermal energy output. 1 ΔK = 1 megawatt-hour. Citizens
+                        earn credits based on contribution to the Society.
+                    </p>
+
+                    <div class="glass-panel p-6 rounded-xl gold-border">
+                        <h4 class="font-bold mb-3 flex items-center gap-2">
+                            <i class="fas fa-bolt text-yellow-600"></i>
+                            Energy-Based Economy
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>✓ No inflation: Energy output is constant</li>
+                            <li>✓ Universal Basic Energy: 500 ΔK/month per citizen</li>
+                            <li>✓ Excess can be traded for goods or global currency</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-xl gold-border">
+                        <h4 class="font-bold mb-3 flex items-center gap-2">
+                            <i class="fas fa-building text-slate-800"></i>
+                            Shell Corporations
+                        </h4>
+                        <p class="text-sm text-gray-600">
+                            We own 40+ Fortune 500 companies through 7 layers of shell entities. Primary sectors:
+                            Banking, Tech, Pharmaceuticals, and Energy.
+                        </p>
+                        <div class="mt-3 text-xs text-gray-500">
+                            <p><em>Examples: Global Venture Fund, Helios Pharma, Obsidian Technologies</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="glass-panel p-6 rounded-xl">
+                        <h3 class="text-xl font-bold mb-4">Global Market Influence</h3>
+                        <div class="chart-container">
+                            <canvas id="economyChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-xl bg-slate-50">
+                        <h4 class="font-bold mb-3">How We Fund Operations</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span>Geothermal Energy Export</span>
+                                <span class="font-bold text-teal-600">45%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-teal-600 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Corporate Dividends</span>
+                                <span class="font-bold text-orange-600">35%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-600 h-2 rounded-full" style="width: 35%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Knowledge Patents</span>
+                                <span class="font-bold text-blue-600">20%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: INTERACTIVE MAP -->
+        <div id="map-section" class="tab-content hidden space-y-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Continental Map</h2>
+                <p class="text-gray-600">Explore the 7 Districts of Arkadis</p>
+            </div>
+
+            <div class="glass-panel p-8 rounded-xl">
+                <div class="relative bg-slate-800 rounded-lg p-8 min-h-[500px]">
+                    <!-- Simplified SVG Map -->
+                    <svg viewBox="0 0 800 600" class="w-full h-auto">
+                        <!-- Ocean background -->
+                        <rect width="800" height="600" fill="#1e293b" />
+
+                        <!-- Main Island Shape -->
+                        <path
+                            d="M 200 250 Q 250 200, 350 220 Q 450 240, 550 280 Q 600 320, 580 400 Q 550 480, 450 500 Q 350 510, 250 480 Q 180 450, 200 350 Z"
+                            fill="#b45309" stroke="#f97316" stroke-width="3" opacity="0.9" />
+
+                        <!-- Districts -->
+                        <!-- Central Junction -->
+                        <circle cx="400" cy="350" r="40" fill="#ef4444" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="junction" />
+                        <text x="400" y="355" text-anchor="middle" fill="white" font-size="12"
+                            font-weight="bold">Junction</text>
+
+                        <!-- Capital -->
+                        <circle cx="350" cy="280" r="35" fill="#eab308" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="capital" />
+                        <text x="350" y="285" text-anchor="middle" fill="white" font-size="11"
+                            font-weight="bold">Capital</text>
+
+                        <!-- Training Grounds -->
+                        <circle cx="500" cy="320" r="30" fill="#3b82f6" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="training" />
+                        <text x="500" y="325" text-anchor="middle" fill="white" font-size="10"
+                            font-weight="bold">Training</text>
+
+                        <!-- Agricultural Zone -->
+                        <circle cx="280" cy="400" r="30" fill="#22c55e" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="agri" />
+                        <text x="280" y="405" text-anchor="middle" fill="white" font-size="10"
+                            font-weight="bold">Agri</text>
+
+                        <!-- Research Labs -->
+                        <circle cx="450" cy="420" r="28" fill="#8b5cf6" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="research" />
+                        <text x="450" y="425" text-anchor="middle" fill="white" font-size="10"
+                            font-weight="bold">Labs</text>
+
+                        <!-- Defense Grid -->
+                        <circle cx="520" cy="400" r="25" fill="#dc2626" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="defense" />
+                        <text x="520" y="405" text-anchor="middle" fill="white" font-size="9"
+                            font-weight="bold">Defense</text>
+
+                        <!-- Residential -->
+                        <circle cx="320" cy="340" r="32" fill="#14b8a6" opacity="0.8"
+                            class="cursor-pointer district-marker" data-district="residential" />
+                        <text x="320" y="345" text-anchor="middle" fill="white" font-size="10"
+                            font-weight="bold">Res</text>
+
+                        <!-- Coordinates marker -->
+                        <text x="400" y="550" text-anchor="middle" fill="#cbd5e1" font-size="14">25°S, 70°E</text>
+                    </svg>
+                </div>
+
+                <!-- District Info Panel -->
+                <div id="district-info" class="mt-6 p-6 bg-orange-50 rounded-lg border border-orange-200">
+                    <h3 class="font-bold text-orange-900 mb-2">Hover over a district to learn more</h3>
+                    <p class="text-sm text-orange-800" id="district-description">Select a location on the map above.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: SELECTION TEST -->
+        <div id="selection-section" class="tab-content hidden space-y-8">
+            <div class="bg-gradient-to-r from-purple-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl text-center">
+                <h2 class="text-3xl font-bold mb-4">Are You Worthy of Selection?</h2>
+                <p class="text-slate-300 max-w-2xl mx-auto">
+                    Only 0.001% of humanity possesses the qualities we seek. Take this assessment to discover if you
+                    would be considered for immigration.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 rounded-xl max-w-3xl mx-auto">
+                <div id="test-questions" class="space-y-6">
+                    <div class="question-block">
+                        <h3 class="font-bold mb-3">1. Your primary motivation in life is:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q1" value="10" class="w-4 h-4">
+                                <span>Acquiring knowledge and pushing boundaries</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q1" value="5" class="w-4 h-4">
+                                <span>Personal wealth and comfort</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q1" value="3" class="w-4 h-4">
+                                <span>Social status and recognition</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q1" value="8" class="w-4 h-4">
+                                <span>Serving a greater purpose beyond myself</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <h3 class="font-bold mb-3">2. You discover a truth that could destabilize society. You:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q2" value="2" class="w-4 h-4">
+                                <span>Expose it immediately for transparency</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q2" value="10" class="w-4 h-4">
+                                <span>Assess consequences and act strategically</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q2" value="4" class="w-4 h-4">
+                                <span>Ignore it—not my responsibility</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q2" value="7" class="w-4 h-4">
+                                <span>Use it for personal advantage</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <h3 class="font-bold mb-3">3. True power comes from:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q3" value="10" class="w-4 h-4">
+                                <span> Knowledge and control of information</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q3" value="5" class="w-4 h-4">
+                                <span>Military and physical strength</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q3" value="6" class="w-4 h-4">
+                                <span>Financial resources</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q3" value="3" class="w-4 h-4">
+                                <span>Popular support</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <h3 class="font-bold mb-3">4. You would sacrifice personal freedom for:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q4" value="2" class="w-4 h-4">
+                                <span>Nothing—freedom is absolute</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q4" value="10" class="w-4 h-4">
+                                <span>Access to forbidden knowledge and technology</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q4" value="7" class="w-4 h-4">
+                                <span>Guaranteed security and prosperity</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q4" value="5" class="w-4 h-4">
+                                <span>Protecting loved ones</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-block">
+                        <h3 class="font-bold mb-3">5. The ideal society is one where:</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q5" value="4" class="w-4 h-4">
+                                <span>Everyone has equal voice and power</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q5" value="10" class="w-4 h-4">
+                                <span>The most capable lead, merit is absolute</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q5" value="6" class="w-4 h-4">
+                                <span>Tradition and hierarchy maintain order</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="q5" value="3" class="w-4 h-4">
+                                <span>Individual freedom is maximized</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="calculateSelection()"
+                    class="w-full mt-8 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold py-4 px-6 rounded-lg hover:shadow-lg transition-all transform hover:scale-105">
+                    Submit Assessment
+                </button>
+
+                <div id="selection-result" class="hidden mt-6 p-6 rounded-lg"></div>
+            </div>
+        </div>
+
+        <!-- SECTION: DAILY LIFE -->
+        <div id="daily-section" class="tab-content hidden space-y-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Life in Arkadis</h2>
+                <p class="text-gray-600">What does a typical day look like for an Arkadian citizen?</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fas fa-home text-teal-600"></i>
+                        Housing & Living
+                    </h3>
+                    <p class="text-gray-700">
+                        85% of the population lives underground in climate-controlled bio-domes. These "Under-Cities"
+                        are built into cooled lava chambers, offering protection from surface heat.
+                    </p>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <h4 class="font-bold mb-3">Residential Tiers</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-yellow-500 w-3 h-3 rounded-full mt-1"></span>
+                                <div>
+                                    <strong>Level 1 (Elite):</strong> Surface villas with Lumina Tree gardens. Reserved
+                                    for Arcadian bloodlines and Panel members.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-teal-500 w-3 h-3 rounded-full mt-1"></span>
+                                <div>
+                                    <strong>Level 2 (Standard):</strong> Underground apartments with vertical gardens.
+                                    Most citizens reside here.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-gray-500 w-3 h-3 rounded-full mt-1"></span>
+                                <div>
+                                    <strong>Level 3 (Provisional):</strong> Communal dorms for new immigrants. 5-year
+                                    probation period.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fas fa-utensils text-orange-600"></i>
+                        Food & Nutrition
+                    </h3>
+                    <p class="text-gray-700">
+                        Agriculture is 100% controlled and optimized. No one starves in Arkadis.
+                    </p>
+                    <div class="glass-panel p-6 rounded-xl">
+                        <h4 class="font-bold mb-3">Primary Food Sources</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center">
+                                <span>Obsidian Mushrooms (protein)</span>
+                                <span class="font-bold">30%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-600 h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Hydroponic Vegetables</span>
+                                <span class="font-bold">25%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Thermal Fish Farms</span>
+                                <span class="font-bold">20%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 20%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Synthetic Nutri-Paste</span>
+                                <span class="font-bold">15%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 15%"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span>Imported Luxuries</span>
+                                <span class="font-bold">10%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-6 rounded-xl">
+                <h3 class="text-xl font-bold mb-4">A Day in the Life</h3>
+                <div class="space-y-4 text-sm text-gray-700">
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">06:00</div>
+                        <div>Wake cycle (artificial sun simulation begins)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">07:00</div>
+                        <div>Morning conditioning (mandatory 30min physical training)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">08:00</div>
+                        <div>Breakfast at Central Hubs (communal dining encouraged)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">09:00</div>
+                        <div>Work assignment (6-hour shifts, role-based)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">15:00</div>
+                        <div>Personal development (study, training, or leisure)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">18:00</div>
+                        <div>Evening meal</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">19:00</div>
+                        <div>Recreation (Pyro-Ball leagues, Lumina Gardens, VR lounges)</div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="font-bold text-orange-600 w-20">22:00</div>
+                        <div>Sleep cycle initiated</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-teal-50 border border-teal-200 p-6 rounded-xl">
+                <h3 class="text-lg font-bold text-teal-900 mb-2">Work-Life Balance</h3>
+                <p class="text-sm text-teal-800">
+                    Citizens work only 6 hours/day, 5 days/week. The rest is dedicated to research, training, or
+                    personal pursuits. Burnout is considered a failure of the Society.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs font-mono">
+            <p>ARKADIS INTERNAL NETWORK // EYES ONLY</p>
+            <p class="mt-2 text-slate-600">Unauthorized access will trigger Erasure Protocols.</p>
+        </div>
+    </footer>
+
+    <!-- Visualization & Content Choices:
+         1. Radar Chart (Overview): Abstract values showing the balance of Secrecy, Tech, and Tradition.
+         2. Line Chart (History): Visualizes the "Artificial" growth of landmass over time, proving the tech narrative.
+         3. Doughnut Chart (Society): Shows the 8 Secret Members vs the 7 Ministers.
+         4. Mixed Chart (Geology): Shows the correlation between seismic activity (the engine) and growth.
+         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+
+    <script>
+        // State
+        const state = { currentTab: 'overview', charts: {} };
+
+        // Data
+        const data = {
+            growth: [100, 500, 2000, 8000, 25000, 3800000], // Square km over time
+            growthLabels: ['500 AD', '1000 AD', '1500 AD', '1800 AD', '1950', '2023'],
+            panel: [8, 7], // Secret vs Ministers
+        };
+
+        // Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('nav-active', btn.dataset.tab === tabId);
+                btn.classList.toggle('text-gray-500', btn.dataset.tab !== tabId);
+            });
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`${tabId}-section`).classList.remove('hidden');
+
+            state.currentTab = tabId;
+            if (state.charts[tabId]) state.charts[tabId].resize();
+        }
+
+        // Charts
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+        });
+
+        function initCharts() {
+            // 1. Overview Radar
+            new Chart(document.getElementById('overviewRadar'), {
+                type: 'radar',
+                data: {
+                    labels: ['Secrecy', 'Technology', 'Ayurveda', 'Land Mass', 'Influence'],
+                    datasets: [{
+                        label: 'Arkadis Profile',
+                        data: [100, 95, 85, 70, 90],
+                        backgroundColor: 'rgba(180, 83, 9, 0.2)',
+                        borderColor: '#b45309',
+                        borderWidth: 2
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { r: { ticks: { display: false } } }, plugins: { legend: { display: false } } }
+            });
+
+            // 2. Growth Line Chart (History)
+            new Chart(document.getElementById('growthChart'), {
+                type: 'line',
+                data: {
+                    labels: data.growthLabels,
+                    datasets: [{
+                        label: 'Land Area (sq km)',
+                        data: data.growth,
+                        borderColor: '#0d9488',
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { y: { type: 'logarithmic' } } }
+            });
+
+            // 3. Panel Chart (Society)
+            new Chart(document.getElementById('panelChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Inner Circle (Secret Society)', 'Ministers (Domestic)'],
+                    datasets: [{
+                        data: data.panel,
+                        backgroundColor: ['#1e293b', '#cbd5e1'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // 4. Geology Chart (Original preserved)
+            new Chart(document.getElementById('geoChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        { label: 'Seismic Events', data: [120, 145, 132, 180, 160, 210], backgroundColor: '#f97316' },
+                        { label: 'Growth (sq m)', data: [500, 800, 600, 1200, 900, 1500], type: 'line', borderColor: '#1e293b', yAxisID: 'y1' }
+                    ]
+                },
+                options: { maintainAspectRatio: false, scales: { y1: { position: 'right', grid: { drawOnChartArea: false } } } }
+            });
+
+            // 5. Sports Chart
+            new Chart(document.getElementById('sportsChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Pyro-Ball', 'Ridge Run', 'Storm Sail', 'Combat'],
+                    datasets: [{
+                        label: 'Participation %',
+                        data: [85, 70, 45, 90],
+                        backgroundColor: '#9ca3af',
+                        borderRadius: 4
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // 6. Defense Chart
+            new Chart(document.getElementById('defenseChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [
+                        { label: 'Zone-1', data: [0, 0, 0, 0, 0, 0], borderColor: '#10b981', fill: false },
+                        { label: 'Zone-2', data: [5, 3, 7, 4, 6, 5], borderColor: '#f59e0b', fill: false },
+                        { label: 'Zone-3', data: [15, 22, 18, 25, 20, 28], borderColor: '#ef4444', fill: false }
+                    ]
+                },
+                options: { maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+            });
+
+            // 7. Flora Chart
+            new Chart(document.getElementById('floraChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pyro-Ferns', 'Lumina Trees', 'Magma Lizards', 'Ash Hawks', 'Thermal Kelp', 'Obsidian Mushrooms'],
+                    datasets: [{
+                        data: [20, 18, 10, 8, 25, 19],
+                        backgroundColor: ['#f97316', '#0d9488', '#dc2626', '#6b7280', '#3b82f6', '#a855f7'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // 8. Economy Chart
+            new Chart(document.getElementById('economyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Banking', 'Tech', 'Pharma', 'Energy', 'Manufacturing'],
+                    datasets: [{
+                        label: 'Control %',
+                        data: [28, 35, 22, 40, 15],
+                        backgroundColor: ['#eab308', '#3b82f6', '#8b5cf6', '#f97316', '#6b7280'],
+                        borderRadius: 6
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 50 } } }
+            });
+        }
+
+        // Map District Interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            const districts = {
+                junction: { name: 'Central Junction', desc: 'The geothermal core. Home to the Triple Junction energy source. Temperature: 45°C. Access: Restricted.' },
+                capital: { name: 'The Capital', desc: 'Administrative center. Houses the Panel and Arcadian family. Population: 50,000.' },
+                training: { name: 'Training Grounds', desc: 'Elite physical conditioning facilities. Pyro-Ball arenas and Ridge Running courses. Mandatory for all citizens.' },
+                agri: { name: 'Agricultural Zone', desc: 'Hydroponic farms and Obsidian Mushroom cultivation. Feeds 95% of the population.' },
+                research: { name: 'Research Labs', desc: 'Bio-engineering, weapons development, and energy research. Clearance: Level 2+.' },
+                defense: { name: 'Defense Grid', desc: 'Central command for the Void Canon and Sentinel drones. 24/7 operations.' },
+                residential: { name: 'Residential District', desc: 'Underground cities housing 2 million citizens. Climate-controlled bio-domes.' }
+            };
+
+            document.querySelectorAll('.district-marker').forEach(marker => {
+                marker.addEventListener('mouseenter', (e) => {
+                    const district = e.target.dataset.district;
+                    if (districts[district]) {
+                        document.getElementById('district-info').querySelector('h3').textContent = districts[district].name;
+                        document.getElementById('district-description').textContent = districts[district].desc;
+                    }
+                });
+            });
+        });
+
+        // Selection Test Calculator
+        function calculateSelection() {
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) score += parseInt(selected.value);
+            }
+
+            const resultDiv = document.getElementById('selection-result');
+            resultDiv.classList.remove('hidden');
+
+            if (score >= 45) {
+                resultDiv.className = 'mt-6 p-6 rounded-lg bg-green-100 border-2 border-green-600';
+                resultDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-green-900 mb-2">✓ APPROVED FOR SELECTION</h3>
+                    <p class="text-green-800">Score: ${score}/50</p>
+                    <p class="mt-3 text-sm text-green-700">Your profile aligns with Arkadian values. You would be considered for immigration by the Inner Circle. A representative will contact you in 3-5 business... centuries.</p>
+                `;
+            } else if (score >= 30) {
+                resultDiv.className = 'mt-6 p-6 rounded-lg bg-yellow-100 border-2 border-yellow-600';
+                resultDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-yellow-900 mb-2">⚠ PROBATIONARY</h3>
+                    <p class="text-yellow-800">Score: ${score}/50</p>
+                    <p class="mt-3 text-sm text-yellow-700">You show potential but require re-education. If selected, you would begin in Level-3 housing with mandatory conditioning for 5 years.</p>
+                `;
+            } else {
+                resultDiv.className = 'mt-6 p-6 rounded-lg bg-red-100 border-2 border-red-600';
+                resultDiv.innerHTML = `
+                    <h3 class="text-2xl font-bold text-red-900 mb-2">✗ REJECTED</h3>
+                    <p class="text-red-800">Score: ${score}/50</p>
+                    <p class="mt-3 text-sm text-red-700">Your values do not align with the Society. Remain in the outside world. This conversation never happened.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+
+</html>
