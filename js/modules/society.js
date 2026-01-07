@@ -544,5 +544,35 @@ export const societyModule = {
 
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
+
+        // HOLOGRAPHIC TILT EFFECT
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10; // Max 10deg rotation
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+                // Dynamic Glare
+                const glareX = (x / rect.width) * 100;
+
+                card.style.background = `
+                    linear-gradient(135deg, rgba(255,255,255,0.1) ${glareX}%, rgba(255,255,255,0) ${glareX + 20}%),
+                    linear-gradient(to bottom, #1e293b, #0f172a)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                card.style.background = ''; // Reset to default CSS
+            });
+        });
     }
 };

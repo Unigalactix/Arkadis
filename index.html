@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arkadis: The Hidden Continent</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -213,7 +214,7 @@
                 <!-- Unveiled Toggle -->
                 <div class="flex items-center gap-3">
                     <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter hidden md:block"
-                        id="toggle-label">The Order</span>
+                        id="toggle-label"> </span>
                     <button id="mode-toggle"
                         class="toggle-unveiled w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 hover:border-orange-500 transition-all">
                         <i class="fas fa-eye"></i>
@@ -247,6 +248,12 @@
                         data-tab="geology">Geo-Tech</button>
                     <button onclick="switchTab('sports')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
                         data-tab="sports">Training</button>
+                    <button onclick="switchTab('disasters')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                        data-tab="disasters">Disasters</button>
+                    <button onclick="switchTab('currency')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                        data-tab="currency">Currency</button>
+                    <button onclick="switchTab('wiretap')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                        data-tab="wiretap">Wiretap</button>
                     <button onclick="switchTab('chess')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
                         data-tab="chess">The Game</button>
                 </nav>
@@ -281,6 +288,10 @@
                 class="text-left py-2 px-4 hover:bg-orange-50 rounded">Geo-Tech</button>
             <button onclick="switchTab('sports')"
                 class="text-left py-2 px-4 hover:bg-orange-50 rounded">Training</button>
+            <button onclick="switchTab('disasters')"
+                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Disasters</button>
+            <button onclick="switchTab('currency')"
+                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Currency</button>
             <button onclick="switchTab('chess')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">The
                 Game</button>
         </div>
@@ -302,8 +313,44 @@
         </div>
     </footer>
 
+    <!-- Boot Overlay -->
+    <div id="boot-overlay" class="fixed inset-0 z-[200]"></div>
+
     <!-- Orchestrator -->
     <script type="module" src="js/app.js"></script>
+
+    <!-- CRT Overlay -->
+    <div class="pointer-events-none fixed inset-0 z-[100] overflow-hidden opacity-40">
+        <!-- Scanlines -->
+        <div
+            class="absolute inset-0 bg-[url('https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif')] bg-cover opacity-10">
+        </div>
+        <!-- Vignette -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_50%,rgba(0,0,0,0.6)_100%)]"></div>
+        <!-- Scanline Animation -->
+        <div
+            class="absolute inset-0 animate-scanline bg-gradient-to-b from-transparent via-white/5 to-transparent h-full w-full opacity-10">
+        </div>
+    </div>
+
+    <style>
+        @keyframes scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .animate-scanline {
+            animation: scanline 8s linear infinite;
+        }
+    </style>
+
+    <!-- News Ticker Placeholder -->
+    <div id="news-ticker-container"></div>
 </body>
 
 </html>

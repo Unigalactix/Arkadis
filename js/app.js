@@ -12,6 +12,12 @@ import { geologyModule } from './modules/geology.js';
 import { trainingModule } from './modules/training.js';
 import { chessModule } from './modules/chess.js';
 import { terminalModule } from './modules/terminal.js';
+import { disastersModule } from './modules/disasters.js';
+import { currencyModule } from './modules/currency.js';
+import { wiretapModule } from './modules/wiretap.js';
+import { bootModule } from './modules/boot.js';
+import { audioModule } from './modules/audio.js';
+import { newsModule } from './modules/news.js';
 
 const modules = {
     overview: overviewModule,
@@ -26,6 +32,9 @@ const modules = {
     daily: dailyLifeModule,
     geology: geologyModule,
     sports: trainingModule,
+    disasters: disastersModule,
+    currency: currencyModule,
+    wiretap: wiretapModule,
     chess: chessModule
 };
 
@@ -66,29 +75,26 @@ window.switchTab = function (tabId) {
 // Toggle Unveiled Mode
 function toggleUnveiledMode() {
     window.isUnveiledMode = !window.isUnveiledMode;
-    document.body.classList.toggle('unveiled-mode');
-
-    // Update Header UI
-    const logoIcon = document.getElementById('logo-icon');
-    const toggleLabel = document.getElementById('toggle-label');
-    const archiveStatus = document.getElementById('archive-status');
-    const toggleBtnIcon = document.querySelector('#mode-toggle i');
+    const body = document.body;
 
     if (window.isUnveiledMode) {
-        logoIcon.className = 'fas fa-eye-slash';
-        toggleLabel.textContent = 'The Unveiled';
-        toggleLabel.className = 'text-[10px] font-bold text-red-500 uppercase tracking-tighter hidden md:block';
-        archiveStatus.textContent = 'REBEL LEAK // UNAUTHORIZED DATA STREAM';
-        archiveStatus.className = 'text-[10px] font-mono text-red-600 uppercase tracking-widest';
-        toggleBtnIcon.className = 'fas fa-mask text-red-500';
+        body.classList.add('unveiled-mode');
+        document.getElementById('mode-toggle').innerHTML = '<i class="fas fa-eye-slash"></i>';
+        document.getElementById('toggle-label').textContent = 'THE UNVEILED';
+        document.getElementById('archive-status').innerHTML = "REBEL LEAK // <span class='animate-pulse text-red-500'>SIGNAL INTERCEPTED</span>";
     } else {
-        logoIcon.className = 'fas fa-mountain';
-        toggleLabel.textContent = 'The Order';
-        toggleLabel.className = 'text-[10px] font-bold text-gray-400 uppercase tracking-tighter hidden md:block';
-        archiveStatus.textContent = 'Archive Division // Level 4 Clearance';
-        archiveStatus.className = 'text-[10px] font-mono text-orange-600 uppercase tracking-widest';
-        toggleBtnIcon.className = 'fas fa-eye';
+        body.classList.remove('unveiled-mode');
+        document.getElementById('mode-toggle').innerHTML = '<i class="fas fa-eye"></i>';
+        document.getElementById('toggle-label').textContent = 'THE ORDER';
+        document.getElementById('archive-status').textContent = 'Archive Division // Level 4 Clearance';
     }
+
+    // Play Mode Switch Audio
+    audioModule.playClick();
+    if (window.isUnveiledMode) audioModule.playAlarm();
+
+    // Update News Ticker
+    newsModule.updateMode(window.isUnveiledMode);
 
     // Re-render current tab to reflect mode changes if necessary
     const activeTab = document.querySelector('.nav-active');
@@ -115,6 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
     terminalContainer.innerHTML = terminalModule.render();
     document.body.appendChild(terminalContainer);
     terminalModule.init();
+
+    // Inject and Initialize News Ticker
+    const newsContainer = document.getElementById('news-ticker-container');
+    newsContainer.innerHTML = newsModule.render();
+    newsModule.init();
+
+    // Initialize Boot and Audio
+    bootModule.init();
+    audioModule.init();
 
     switchTab('overview');
 });

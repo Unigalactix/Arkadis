@@ -18,7 +18,7 @@
 - **`js/modules/society.js`**: Home of **"The Order"**.
   - *Rule*: Must always display the Inner Circle & Ministers.
   - *Rule*: Must use **Chess Piece** iconography.
-  - *Rule*: Must include the **RPG Card Modal** logic.
+  - *Rule*: Must include the **RPG Card Modal** logic and **Holographic Tilt**.
 - **`js/modules/characters.js`**: Home of **"The Rebels"** & **"Relationship Web"**.
   - *Rule*: Must include the Mermaid.js graph.
 - **`js/modules/map.js`**: Home of the **Satellite Map**.
@@ -103,3 +103,23 @@
 - **OMEGA**: Reveal self-destruct protocol.
 - **RENO**: Reveal surveillance log on Protagonist.
 - **VEIL**: Reveal physics of the cloak.
+
+---
+
+## 6. SPECIAL MODULES (PREMIUM UPGRADE)
+*   **Cinematic Boot (`boot.js`)**:
+    *   **Behavior**: BIOMETRIC CAMERA SCAN. Runs once per session.
+    *   **Features**: Scrolling logs, "Retina Scan" overlay, Fallback logic.
+*   **Audio Manager (`audio.js`)**:
+    *   **Sounds**: UI interactions (Click, Hover) + "Unveiled" Alarm drone.
+*   **The Wiretap (`wiretap.js`)**:
+    *   **Function**: Spy on encrypted chats between Reno/Sariel.
+    *   **Style**: CRT monitor, live typing simulation.
+*   **Holographic Cards (`society.js`)**:
+    *   **Effect**: 3D Mouse-tracking Tilt + Dynamic Glare.
+*   **Global CRT Overlay**:
+    *   **Effect**: Scanlines, Vignette, Chromatic Aberration (pointer-events-none).
+
+## 7. ASSET MANIFEST
+*   **Favicon**: `favicon.png` (Stylized 'A' - Gold/Slate).
+*   **Images**: All sourced from Unsplash or generated. No placeholders.
