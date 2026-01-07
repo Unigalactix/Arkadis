@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
         rel="stylesheet">
@@ -140,6 +141,8 @@
                         data-tab="geology">Geo-Tech</button>
                     <button onclick="switchTab('sports')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
                         data-tab="sports">Training</button>
+                    <button onclick="switchTab('chess')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                        data-tab="chess">The Game</button>
                 </nav>
 
                 <!-- Mobile Menu Toggle -->
@@ -172,6 +175,8 @@
                 class="text-left py-2 px-4 hover:bg-orange-50 rounded">Geo-Tech</button>
             <button onclick="switchTab('sports')"
                 class="text-left py-2 px-4 hover:bg-orange-50 rounded">Training</button>
+            <button onclick="switchTab('chess')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">The
+                Game</button>
         </div>
     </header>
 

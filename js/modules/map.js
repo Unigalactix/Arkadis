@@ -1,147 +1,132 @@
 export const mapModule = {
     render: () => `
-        <div id="map-section" class="tab-content hidden space-y-8">
+        <div id="map-section" class="tab-content hidden space-y-8 animate-fade-in">
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900">Continental Map</h2>
-                <p class="text-gray-600">Explore the 7 Districts of Arkadis</p>
+                <h2 class="text-3xl font-bold text-gray-900 serif">Continental Satellite Imagery</h2>
+                <p class="text-gray-600">The Triple Junction Archive // High-Resolution Topography</p>
             </div>
 
-            <div class="glass-panel p-8 rounded-xl">
-                <div class="relative bg-slate-800 rounded-lg p-8 min-h-[500px]">
-                    <!-- Simplified SVG Map -->
-                    <svg viewBox="0 0 800 600" class="w-full h-auto">
-                        <!-- Ocean background -->
-                        <rect width="800" height="600" fill="#1e293b" />
+            <div class="glass-panel p-4 rounded-xl shadow-2xl overflow-hidden bg-slate-900 border-2 border-slate-800">
+                <div class="relative w-full aspect-[16/9] bg-slate-950 rounded-lg overflow-hidden group">
+                    <!-- Satellite Map Background -->
+                    <img src="image.png" 
+                         class="w-full h-full object-cover opacity-90 transition-transform duration-[20s] group-hover:scale-110" 
+                         alt="Arkadis Satellite Map">
+                    
+                    <!-- Scanline Overlay -->
+                    <div class="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
 
-                        <!-- Main Island Shape -->
-                        <path
-                            d="M 200 250 Q 250 200, 350 220 Q 450 240, 550 280 Q 600 320, 580 400 Q 550 480, 450 500 Q 350 510, 250 480 Q 180 450, 200 350 Z"
-                            fill="#b45309" stroke="#f97316" stroke-width="3" opacity="0.9" />
-
-                        <!-- Districts -->
-                        <!-- Central Junction -->
-                        <circle cx="400" cy="350" r="40" fill="#ef4444" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="junction" />
-                        <text x="400" y="355" text-anchor="middle" fill="white" font-size="12"
-                            font-weight="bold">Junction</text>
-
-                        <!-- Capital -->
-                        <circle cx="350" cy="280" r="35" fill="#eab308" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="capital" />
-                        <text x="350" y="285" text-anchor="middle" fill="white" font-size="11"
-                            font-weight="bold">Capital</text>
-
-                        <!-- Training Grounds -->
-                        <circle cx="500" cy="320" r="30" fill="#3b82f6" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="training" />
-                        <text x="500" y="325" text-anchor="middle" fill="white" font-size="10"
-                            font-weight="bold">Training</text>
-
-                        <!-- Agricultural Zone -->
-                        <circle cx="280" cy="400" r="30" fill="#22c55e" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="agri" />
-                        <text x="280" y="405" text-anchor="middle" fill="white" font-size="10"
-                            font-weight="bold">Agri</text>
-
-                        <!-- Research Labs -->
-                        <circle cx="450" cy="420" r="28" fill="#8b5cf6" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="research" />
-                        <text x="450" y="425" text-anchor="middle" fill="white" font-size="10"
-                            font-weight="bold">Labs</text>
-
-                        <!-- Defense Grid -->
-                        <circle cx="520" cy="400" r="25" fill="#dc2626" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="defense" />
-                        <text x="520" y="405" text-anchor="middle" fill="white" font-size="9"
-                            font-weight="bold">Defense</text>
-
-                        <!-- Residential -->
-                        <circle cx="320" cy="340" r="32" fill="#14b8a6" opacity="0.8"
-                            class="cursor-pointer district-marker" data-district="residential" />
-                        <text x="320" y="345" text-anchor="middle" fill="white" font-size="10"
-                            font-weight="bold">Res</text>
-
-                        <!-- Coordinates marker -->
-                        <text x="400" y="550" text-anchor="middle" fill="#cbd5e1" font-size="14">25°S, 70°E</text>
-                    </svg>
-                </div>
-
-                <!-- District Info Panel -->
-                <div id="district-info" class="mt-6 p-6 bg-orange-50 rounded-lg border border-orange-200">
-                    <h3 class="font-bold text-orange-900 mb-2">Hover over a district to learn more</h3>
-                    <p class="text-sm text-orange-800" id="district-description">Select a location on the map above.</p>
-                </div>
-            </div>
-
-            <!-- NEW MAP CONTENT -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="glass-panel p-6 rounded-xl bg-slate-900 text-slate-300">
-                    <h3 class="text-xl font-bold text-white mb-4"><i
-                            class="fas fa-layer-group text-orange-500 mr-2"></i>Sub-Level Topology</h3>
-                    <div class="space-y-4">
-                        <div class="border-l-2 border-orange-600 pl-4">
-                            <h4 class="text-sm font-bold text-orange-400 uppercase">Tier-S: The Surface</h4>
-                            <p class="text-[11px]">Military HQs, The Void Canon towers, and the Arcadian Villas. 5% of
-                                population.</p>
+                    <!-- Interactive Region Hotspots -->
+                    <div class="absolute inset-0">
+                        <!-- Veyrath Mountain Range -->
+                        <div class="absolute top-[30%] left-[45%] w-32 h-20 cursor-pointer region-hotspot" data-region="veyrath">
+                             <div class="absolute inset-0 border-2 border-orange-500/20 rounded-full animate-pulse-slow"></div>
+                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-[0_0_15px_#f97316]"></div>
                         </div>
-                        <div class="border-l-2 border-teal-600 pl-4 bg-teal-900/20 py-2">
-                            <h4 class="text-sm font-bold text-teal-400 uppercase">Tier-1: The Glow</h4>
-                            <p class="text-[11px]">Primary Bio-domes, Residential Districts, and Lumina Gardens. 80% of
-                                population.</p>
+
+                        <!-- The Central Hub (The Glow) -->
+                        <div class="absolute top-[50%] left-[50%] w-24 h-24 cursor-pointer region-hotspot" data-region="hub">
+                             <div class="absolute inset-0 border-4 border-teal-500/30 rounded-full animate-ping-slow"></div>
+                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-teal-400 rounded-full shadow-[0_0_20px_#2dd4bf]"></div>
                         </div>
-                        <div class="border-l-2 border-yellow-600 pl-4">
-                            <h4 class="text-sm font-bold text-yellow-400 uppercase">Tier-2: The Steam</h4>
-                            <p class="text-[11px]">Heavy manufacturing, Hydroponic vats, and Thermal fish farms. 15% of
-                                population.</p>
+
+                        <!-- Southwestern Ridge (Defense Grid) -->
+                        <div class="absolute bottom-[25%] left-[38%] w-20 h-20 cursor-pointer region-hotspot" data-region="defense">
+                             <div class="absolute inset-0 border-2 border-red-500/20 rounded-full"></div>
+                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-red-600 rounded-full shadow-[0_0_15px_#dc2626]"></div>
                         </div>
-                        <div class="border-l-2 border-red-600 pl-4">
-                            <h4 class="text-sm font-bold text-red-500 uppercase">Tier-3: The Core</h4>
-                            <p class="text-[11px]">Automated Data-Stacks, Geothermal Vents, and The Triple Junction
-                                Engine. Restricted.</p>
+
+                        <!-- Eastern Archipelago (Research Vats) -->
+                        <div class="absolute top-[55%] right-[32%] w-24 h-16 cursor-pointer region-hotspot" data-region="vats">
+                             <div class="absolute inset-0 border-2 border-indigo-500/20 rounded-full"></div>
+                             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-indigo-500 rounded-full shadow-[0_0_15px_#6366f1]"></div>
                         </div>
+                    </div>
+
+                    <!-- HUD Overlay -->
+                    <div class="absolute top-6 left-6 font-mono text-[10px] text-teal-400/80 space-y-1 pointer-events-none">
+                        <div>STATION: RODRIGUES_VT_01</div>
+                        <div>COORD: 25.0000° S, 70.0000° E</div>
+                        <div>SIGNAL: ENCRYPTED // L4_CLEARANCE</div>
+                    </div>
+                    
+                    <div class="absolute bottom-6 right-6 font-mono text-[10px] text-orange-400/80 animate-pulse pointer-events-none">
+                        LIVE_SATELLITE_FEED // 10.4GBPS
                     </div>
                 </div>
 
-                <div class="space-y-4">
-                    <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-600">
-                        <h4 class="font-bold text-slate-800 mb-2"><i
-                                class="fas fa-subway text-blue-600 mr-2"></i>Hydra-Transit Network</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed mb-3">A world-spanning network of vacuum-sealed
-                            underwater tunnels. Allows for the movement of goods and personnel without surface
-                            detection.</p>
-                        <ul class="text-[10px] space-y-2 text-gray-500 font-mono">
-                            <li class="flex justify-between"><span>ARK-HDK (Hokkaido Line)</span> <span
-                                    class="text-green-600">ACTIVE</span></li>
-                            <li class="flex justify-between"><span>ARK-ZRH (Zurich Line)</span> <span
-                                    class="text-green-600">ACTIVE</span></li>
-                            <li class="flex justify-between"><span>ARK-NYC (Hudson Line)</span> <span
-                                    class="text-yellow-600">MAINTENANCE</span></li>
-                        </ul>
+                <!-- Info Panel -->
+                <div id="map-info-panel" class="mt-4 p-6 bg-slate-800 rounded-lg border border-slate-700 text-slate-300 min-h-[120px] flex items-center gap-6">
+                    <div id="region-icon" class="w-16 h-16 rounded-full bg-slate-700 flex items-center justify-center text-3xl text-orange-500">
+                        <i class="fas fa-satellite"></i>
                     </div>
+                    <div>
+                        <h3 id="region-title" class="text-xl font-bold text-white mb-1">Arkadis Mainframe</h3>
+                        <p id="region-desc" class="text-sm text-slate-400">Hover over the tactical markers to reveal continental data.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-orange-600">
+                    <h4 class="font-bold text-sm text-orange-600 mb-2 uppercase">Rodrigues Triple Junction</h4>
+                    <p class="text-xs text-gray-600">The intersection of the Central, Southwest, and Southeast Indian Ridges. Our primary geothermal conduit.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-teal-600">
+                    <h4 class="font-bold text-sm text-teal-600 mb-2 uppercase">Somalia Plate Interface</h4>
+                    <p class="text-xs text-gray-600">The western tectonic boundary stabilized by the Void Canon array to prevent tremors.</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-indigo-600">
+                    <h4 class="font-bold text-sm text-indigo-600 mb-2 uppercase">Australian Plate Zone</h4>
+                    <p class="text-xs text-gray-600">The eastern boundary used for deep-sea resource extraction and sentinel drone deployment.</p>
                 </div>
             </div>
         </div>
+        <style>
+            .animate-pulse-slow { animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+            .animate-ping-slow { animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
+            .region-hotspot:hover div { transform: scale(1.2); opacity: 1; transition: all 0.3s; }
+        </style>
     `,
     init: () => {
-        const districtData = {
-            junction: "The Triple Junction Engine. The core of Arkadis' energy production.",
-            capital: "The Central District. Home to the Panel and the High Council.",
-            training: "Arcadian Training Grounds. Where elite Sentinels are forged.",
-            agri: "Hydroponic and Marine farming zones. Self-sustenance sector.",
-            research: "Veyrath Hybrid Labs. Center of DNA and energy research.",
-            defense: "Command center for the Void Canon and Sentinel Swarms.",
-            residential: "The Glow. High-tech living spaces for the Arcadian citizens."
+        const regionData = {
+            veyrath: {
+                title: "Veyrath Mountain Range",
+                desc: "The highest peaks on the continent. Home to the Royal Estates and the primary ventilation shafts for the Under-Cities. Tier-S Clearance.",
+                icon: "fa-mountain"
+            },
+            hub: {
+                title: "The Central Hub (The Glow)",
+                desc: "The heart of Arkadis. A high-density metropolitan zone powered by the Junction Engine. 80% of citizens live in the Tier-1 sectors below this peak.",
+                icon: "fa-city"
+            },
+            defense: {
+                title: "Southwestern Defense Grid",
+                desc: "Location of the main Void Canon towers. This region creates the electromagnetic lensing that hides us from global radar.",
+                icon: "fa-shield-halved"
+            },
+            vats: {
+                title: "Veyrath Research Vats",
+                desc: "Bio-engineered lagoons used for marine agriculture and high-yield geothermal research. Restricted to Council scientists.",
+                icon: "fa-flask-vial"
+            }
         };
 
-        const markers = document.querySelectorAll('.district-marker');
-        const infoTitle = document.querySelector('#district-info h3');
-        const infoDesc = document.querySelector('#district-description');
+        const hotspots = document.querySelectorAll('.region-hotspot');
+        const titleEl = document.getElementById('region-title');
+        const descEl = document.getElementById('region-desc');
+        const iconContainer = document.querySelector('#region-icon i');
 
-        markers.forEach(marker => {
-            marker.addEventListener('mouseenter', function () {
-                const district = this.getAttribute('data-district');
-                infoTitle.textContent = district.charAt(0).toUpperCase() + district.slice(1);
-                infoDesc.textContent = districtData[district];
+        hotspots.forEach(spot => {
+            spot.addEventListener('mouseenter', function () {
+                const region = this.dataset.region;
+                const data = regionData[region];
+
+                titleEl.textContent = data.title;
+                descEl.textContent = data.desc;
+                iconContainer.className = `fas ${data.icon}`;
+
+                // Audio feedback if needed (optional)
             });
         });
     }

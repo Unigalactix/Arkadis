@@ -10,6 +10,7 @@ import { mapModule } from './modules/map.js';
 import { dailyLifeModule } from './modules/daily_life.js';
 import { geologyModule } from './modules/geology.js';
 import { trainingModule } from './modules/training.js';
+import { chessModule } from './modules/chess.js';
 
 const modules = {
     overview: overviewModule,
@@ -23,7 +24,8 @@ const modules = {
     map: mapModule,
     daily: dailyLifeModule,
     geology: geologyModule,
-    sports: trainingModule
+    sports: trainingModule,
+    chess: chessModule
 };
 
 // Global switchTab function
