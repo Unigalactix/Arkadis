@@ -81,11 +81,64 @@ export const mapModule = {
                     <p class="text-xs text-gray-600">The eastern boundary used for deep-sea resource extraction and sentinel drone deployment.</p>
                 </div>
             </div>
+
+            <!-- TIERED TOPOLOGY (NEW) -->
+            <div class="glass-panel p-8 rounded-3xl border-t-8 border-slate-900 shadow-2xl bg-gradient-to-b from-white to-slate-50">
+                <h3 class="text-2xl font-bold mb-10 text-slate-800 flex items-center gap-3">
+                    <i class="fas fa-layer-group text-orange-600"></i> Vertical Tier Topology (Cross-Section)
+                </h3>
+                
+                <div class="flex flex-col gap-1 relative pl-12">
+                    <!-- Surface (Tier-S) -->
+                    <div class="relative h-24 bg-sky-100/30 border-2 border-orange-500/30 rounded-t-xl hover:bg-orange-50 transition-colors group p-4 overflow-hidden marker-tier" data-tier="S">
+                         <div class="absolute right-4 top-2 text-[60px] opacity-10 font-bold text-orange-900 leading-none">S</div>
+                         <h4 class="font-bold text-orange-700 uppercase text-xs mb-1">Tier-S: The Surface (The Veil)</h4>
+                         <p class="text-[10px] text-orange-900/70 max-w-md">Void Canon Arrays, Royal Estates, and Cloaking Terminals. 100% Humidity, Artificial Atmosphere.</p>
+                         <div class="absolute bottom-0 left-0 w-full h-[2px] bg-sky-200"></div>
+                    </div>
+
+                    <!-- Level 1 (The Glow) -->
+                    <div class="relative h-32 bg-teal-50 border-x-2 border-teal-500/20 hover:bg-teal-100 transition-colors group p-4 overflow-hidden marker-tier" data-tier="1">
+                         <div class="absolute right-4 top-2 text-[80px] opacity-10 font-bold text-teal-900 leading-none">1</div>
+                         <h4 class="font-bold text-teal-700 uppercase text-xs mb-1">Tier-1: The Glow (Urban)</h4>
+                         <p class="text-[10px] text-teal-900/70 max-w-md">Main Residential Domes, Lumina Gardens, and Civilian VR Hubs. Powered by localized plasma grids.</p>
+                         <div class="absolute bottom-0 left-0 w-full h-[2px] bg-teal-100"></div>
+                    </div>
+
+                    <!-- Level 2 (The Steam) -->
+                    <div class="relative h-28 bg-amber-50 border-x-2 border-amber-500/20 hover:bg-amber-100 transition-colors group p-4 overflow-hidden marker-tier" data-tier="2">
+                         <div class="absolute right-4 top-2 text-[70px] opacity-10 font-bold text-amber-900 leading-none">2</div>
+                         <h4 class="font-bold text-amber-700 uppercase text-xs mb-1">Tier-2: The Steam (Indus)</h4>
+                         <p class="text-[10px] text-amber-900/70 max-w-md">Hydroponic Vats, Heavy Metal 3D-Printing, and Thermal Exchange Units. Restricted access.</p>
+                         <div class="absolute bottom-0 left-0 w-full h-[2px] bg-amber-200"></div>
+                    </div>
+
+                    <!-- Level 3 (The Core) -->
+                    <div class="relative h-24 bg-slate-900 border-2 border-red-900 border-t-0 rounded-b-xl hover:bg-slate-800 transition-colors group p-4 overflow-hidden marker-tier" data-tier="3">
+                         <div class="absolute right-4 top-2 text-[60px] opacity-20 font-bold text-red-600 leading-none">3</div>
+                         <h4 class="font-bold text-red-500 uppercase text-xs mb-1">Tier-3: The Core (Energy)</h4>
+                         <p class="text-[10px] text-red-400 max-w-md">The Triple Junction Engine, Data Stacks, and Magma-Chamber Lensing. Council Access Only.</p>
+                    </div>
+
+                    <!-- Depth Ruler -->
+                    <div class="absolute left-0 top-0 h-full w-8 border-r border-slate-300 flex flex-col justify-between text-[8px] font-mono text-slate-400 py-2">
+                        <span>SL</span>
+                        <span>-2KM</span>
+                        <span>-5KM</span>
+                        <span>-12KM</span>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-4 bg-orange-50 rounded border border-orange-200" id="tier-info">
+                    <p class="text-xs text-orange-800 italic">Hover over a tier to analyze vertical topology.</p>
+                </div>
+            </div>
         </div>
         <style>
             .animate-pulse-slow { animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
             .animate-ping-slow { animation: ping 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
             .region-hotspot:hover div { transform: scale(1.2); opacity: 1; transition: all 0.3s; }
+            .marker-tier { cursor: crosshair; }
         </style>
     `,
     init: () => {
@@ -125,8 +178,24 @@ export const mapModule = {
                 titleEl.textContent = data.title;
                 descEl.textContent = data.desc;
                 iconContainer.className = `fas ${data.icon}`;
+            });
+        });
 
-                // Audio feedback if needed (optional)
+        // Tier Logic
+        const tiers = document.querySelectorAll('.marker-tier');
+        const tierInfo = document.getElementById('tier-info');
+
+        const tierData = {
+            'S': "VEIL PROTOCOL ACTIVE: All surface structures are coated in carbon-nanotube paint to absorb radar. Atmosphere is strictly oxygen-enriched.",
+            '1': "POPULATION DENSITY: 12,000 ppm. Gravity is maintained at a constant 1.05g for skeletal health.",
+            '2': "THERMAL FLUX: 450°C. Manufacturing is 95% automated using high-temperature superconductors.",
+            '3': "CRITICAL CORE: The Junction Engine taps into the earth's mantle. Any breach here triggers the Omega Protocol."
+        };
+
+        tiers.forEach(tier => {
+            tier.addEventListener('mouseenter', () => {
+                const t = tier.dataset.tier;
+                tierInfo.innerHTML = `<p class="text-xs text-orange-900 font-bold">ANALYSIS TIER-${t}:</p><p class="text-[10px] text-orange-800">${tierData[t]}</p>`;
             });
         });
     }

@@ -1,9 +1,55 @@
 export const charactersModule = {
     render: () => `
-        <div id="characters-section" class="tab-content hidden space-y-8 animate-fade-in">
+        <div id="characters-section" class="tab-content hidden space-y-12 animate-fade-in">
             <div class="text-center space-y-4 mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 serif">Characters of Arkadis</h2>
+                <h2 class="text-4xl font-bold text-slate-900 serif">Characters of Arkadis</h2>
+                <div class="w-24 h-1 bg-orange-600 mx-auto rounded-full"></div>
                 <p class="text-gray-600 max-w-2xl mx-auto">The figures shaping the 8th Continent, from those who uphold the Veil to those who seek to tear it down.</p>
+            </div>
+
+            <!-- RELATIONSHIP WEB (NEW) -->
+            <div class="glass-panel p-8 rounded-3xl border-2 border-slate-100 shadow-xl overflow-hidden relative">
+                <div class="absolute top-4 right-6 text-[10px] font-mono text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                    <i class="fas fa-project-diagram mr-1"></i> Social Topology: Classified
+                </div>
+                <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center gap-2">
+                    <i class="fas fa-network-wired text-orange-600"></i> Personnel Relationship Web
+                </h3>
+                <div id="relationship-map" class="mermaid flex justify-center bg-white p-4 rounded-xl min-h-[400px]">
+                    graph TD
+                    %% Nodes
+                    K[Claus Arcadian]
+                    Q[Seraphine Valorian]
+                    R[Reno Kington]
+                    E[Elara Kington]
+                    S[Sariel]
+                    J[Jaxen Vane]
+                    M[Mira Belrose]
+                    L[Lyros Arcadian]
+
+                    %% The Order
+                    K ---|Direct Authority| Q
+                    K ---|Command| R
+                    Q ---|Surveillance| R
+                    K ---|Heir| L
+                    
+                    %% Personal
+                    R <--->|Husband/Wife| E
+                    R -.-|Secret Affair| S
+                    
+                    %% The Conflict
+                    J ---|Recruiter| M
+                    J ---|Influence| L
+                    M ---|Leak Codes| S
+                    S -.-|Safe Passage| J
+                    
+                    %% Styling
+                    style K fill:#b45309,color:#fff,stroke:#000
+                    style Q fill:#7e22ce,color:#fff,stroke:#000
+                    style R fill:#dc2626,color:#fff,stroke:#000
+                    style J fill:#0ea5e9,color:#fff,stroke:#000
+                    style L fill:#fbbf24,color:#000,stroke:#000
+                </div>
             </div>
 
             <div class="space-y-16">
@@ -107,5 +153,9 @@ export const charactersModule = {
             </div>
         </div>
     `,
-    init: () => { }
+    init: () => {
+        if (window.mermaid) {
+            mermaid.contentLoaded();
+        }
+    }
 };
