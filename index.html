@@ -126,6 +126,12 @@
                     <button onclick="switchTab('history')"
                         class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
                         data-tab="history">Origins</button>
+                    <button onclick="switchTab('characters')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="characters">Characters</button>
+                    <button onclick="switchTab('stories')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
+                        data-tab="stories">Stories</button>
                     <button onclick="switchTab('society')"
                         class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
                         data-tab="society">The Order</button>
@@ -141,7 +147,6 @@
                     <button onclick="switchTab('map')"
                         class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
                         data-tab="map">Map</button>
-
                     <button onclick="switchTab('daily')"
                         class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 hover:text-orange-800 transition-colors whitespace-nowrap"
                         data-tab="daily">Daily Life</button>
@@ -161,12 +166,13 @@
         <div id="mobile-nav" class="hidden sm:hidden bg-white border-b border-gray-200 p-4 space-y-2">
             <button onclick="switchTab('overview')" class="block w-full text-left font-bold">Overview</button>
             <button onclick="switchTab('history')" class="block w-full text-left">Origins</button>
+            <button onclick="switchTab('characters')" class="block w-full text-left">Characters</button>
+            <button onclick="switchTab('stories')" class="block w-full text-left">Stories</button>
             <button onclick="switchTab('society')" class="block w-full text-left">The Order</button>
             <button onclick="switchTab('defense')" class="block w-full text-left">Defense</button>
             <button onclick="switchTab('flora')" class="block w-full text-left">Flora & Fauna</button>
             <button onclick="switchTab('economy')" class="block w-full text-left">Economy</button>
             <button onclick="switchTab('map')" class="block w-full text-left">Map</button>
-
             <button onclick="switchTab('daily')" class="block w-full text-left">Daily Life</button>
             <button onclick="switchTab('geology')" class="block w-full text-left">Geo-Tech</button>
             <button onclick="switchTab('sports')" class="block w-full text-left">Training</button>
@@ -330,7 +336,12 @@
                                 class="fas fa-chess-king fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Claus Arcadian</h4>
-                            <div class="text-xs font-bold text-yellow-600 uppercase mb-2">♔ The King / Head of Family
+                            <div class="text-xs font-bold text-yellow-600 uppercase mb-1">♔ The King / Head of Family
+                            </div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 54</span>
+                                <span>Sex: Male</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Optional)</span>
                             </div>
                             <p class="text-sm text-gray-600">
                                 The Founder's direct descendant. Absolute authority over Arkadis. Every decision flows
@@ -345,8 +356,13 @@
                                 class="fas fa-chess-queen fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Seraphine V. Valorian</h4>
-                            <div class="text-xs font-bold text-purple-600 uppercase mb-2">♕ The Queen /
+                            <div class="text-xs font-bold text-purple-600 uppercase mb-1">♕ The Queen /
                                 Second-in-Command</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 42</span>
+                                <span>Sex: Female</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Optional)</span>
+                            </div>
                             <p class="text-sm text-gray-600">
                                 The most versatile strategist. Oversees both domestic and external operations. Can act
                                 with the King's full authority when he is unavailable.
@@ -360,7 +376,12 @@
                                 class="fas fa-chess-bishop fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Lucian M. Shadowend</h4>
-                            <div class="text-xs font-bold text-indigo-600 uppercase mb-2">♗ Bishop of Knowledge</div>
+                            <div class="text-xs font-bold text-indigo-600 uppercase mb-1">♗ Bishop of Knowledge</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 68</span>
+                                <span>Sex: Male</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Internal Affairs)</span>
+                            </div>
                             <p class="text-sm text-gray-600">
                                 Master of intelligence and information warfare. Controls all archives, surveillance
                                 networks, and historical records. Keeper of forbidden knowledge.
@@ -374,7 +395,12 @@
                                 class="fas fa-chess-bishop fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Cassian E. Veyrath</h4>
-                            <div class="text-xs font-bold text-indigo-600 uppercase mb-2">♗ Bishop of Doctrine</div>
+                            <div class="text-xs font-bold text-indigo-600 uppercase mb-1">♗ Bishop of Doctrine</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 45</span>
+                                <span>Sex: Male</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Internal Affairs)</span>
+                            </div>
                             <p class="text-sm text-gray-600">
                                 Ideological guardian. Ensures the Society's values remain pure across generations.
                                 Oversees Selection and re-education programs.
@@ -383,16 +409,27 @@
                     </div>
 
                     <!-- KNIGHT 1: Reno R. Kington -->
-                    <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-red-600">
-                        <div class="bg-red-50 p-3 rounded-full text-red-800"><i class="fas fa-chess-knight fa-lg"></i>
+                    <div
+                        class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-red-600 bg-gradient-to-br from-white to-red-50/30">
+                        <div class="bg-red-50 p-3 rounded-full text-red-800 ring-2 ring-red-200"><i
+                                class="fas fa-chess-knight fa-lg"></i>
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-lg font-bold">Reno R. Kington</h4>
-                            <div class="text-xs font-bold text-red-600 uppercase mb-2">♘ Knight of Erasure / 60th
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-lg font-bold">Reno R. Kington</h4>
+                                <span
+                                    class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter animate-pulse">Protagonist</span>
+                            </div>
+                            <div class="text-xs font-bold text-red-600 uppercase mb-1">♘ Knight of Erasure / 60th
                                 Generation</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 35</span>
+                                <span>Sex: Male</span>
+                                <span class="text-orange-600">Travel: Frequent Global Operations</span>
+                            </div>
                             <p class="text-sm text-gray-600">
-                                Security and tactical operations. Leads the Sentinels. Eliminates external threats.
-                                Specializes in "cleaning" operations—no trace left behind.
+                                The central guardian of Arkadis. Security and tactical operations. Leads the Sentinels.
+                                Eliminates external threats with surgical precision. The primary blade of the Society.
                             </p>
                         </div>
                     </div>
@@ -403,10 +440,15 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Mira D. Stormwatch</h4>
-                            <div class="text-xs font-bold text-red-600 uppercase mb-2">♘ Knight of Infiltration</div>
+                            <div class="text-xs font-bold text-red-600 uppercase mb-1">♘ Knight of Infiltration</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 28</span>
+                                <span>Sex: Female</span>
+                                <span class="text-orange-600">Travel: Permanent External Resident</span>
+                            </div>
                             <p class="text-sm text-gray-600">
-                                Deep cover specialist. Lives among global elites, manipulating events from within. The
-                                only member permitted permanent external residence.
+                                Deep cover specialist. Lives among global elites, manipulating events from within.
+                                Reports to Arkadis once in a while.
                             </p>
                         </div>
                     </div>
@@ -417,7 +459,12 @@
                                 class="fas fa-chess-rook fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Magnus L. Fortress</h4>
-                            <div class="text-xs font-bold text-slate-600 uppercase mb-2">♖ Rook of Defense</div>
+                            <div class="text-xs font-bold text-slate-600 uppercase mb-1">♖ Rook of Defense</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 48</span>
+                                <span>Sex: Male</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Domestic Focus)</span>
+                            </div>
                             <p class="text-sm text-gray-600">
                                 Commander of the Defense Grid. Operates the Void Canon. Responsible for all perimeter
                                 security and atmospheric cloaking systems.
@@ -431,7 +478,12 @@
                                 class="fas fa-chess-rook fa-lg"></i></div>
                         <div class="flex-1">
                             <h4 class="text-lg font-bold">Octavia W. Rampart</h4>
-                            <div class="text-xs font-bold text-slate-600 uppercase mb-2">♖ Rook of Infrastructure</div>
+                            <div class="text-xs font-bold text-slate-600 uppercase mb-1">♖ Rook of Infrastructure</div>
+                            <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                                <span>Age: 39</span>
+                                <span>Sex: Female</span>
+                                <span class="text-blue-600">Travel: Arkadian Base (Domestic Focus)</span>
+                            </div>
                             <p class="text-sm text-gray-600">
                                 Master architect. Oversees all construction, geothermal engineering, and land expansion
                                 projects. The foundation of Arkadis itself.
@@ -483,8 +535,13 @@
                         <div class="bg-teal-100 p-2 rounded-full text-teal-700"><i class="fas fa-chess-pawn"></i></div>
                         <div class="flex-1">
                             <h4 class="font-bold">Davian K. Steelwork</h4>
-                            <div class="text-xs font-bold text-teal-600 uppercase">♟ Minister of Infrastructure</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-teal-600 uppercase">♟ Minister of Infrastructure
+                            </div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 42</span> | <span>Sex: Male</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Roads, tunnels, and bio-dome construction.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 12,500 engineers</div>
@@ -497,8 +554,12 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="font-bold">Elyra T. Vitalis</h4>
-                            <div class="text-xs font-bold text-green-600 uppercase">♟ Minister of Ayurveda</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-green-600 uppercase">♟ Minister of Ayurveda</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 35</span> | <span>Sex: Female</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Healthcare, Lumina Tree medicine, bio-research.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 8,200 physicians</div>
@@ -510,8 +571,12 @@
                         <div class="bg-blue-100 p-2 rounded-full text-blue-700"><i class="fas fa-chess-pawn"></i></div>
                         <div class="flex-1">
                             <h4 class="font-bold">Kairo V. Emberfist</h4>
-                            <div class="text-xs font-bold text-blue-600 uppercase">♟ Minister of Training</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-blue-600 uppercase">♟ Minister of Training</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 30</span> | <span>Sex: Male</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Pyro-Ball leagues, Ridge Running, combat drills.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 3,400 instructors</div>
@@ -523,8 +588,12 @@
                         <div class="bg-lime-100 p-2 rounded-full text-lime-700"><i class="fas fa-chess-pawn"></i></div>
                         <div class="flex-1">
                             <h4 class="font-bold">Thalia M. Rootvein</h4>
-                            <div class="text-xs font-bold text-lime-600 uppercase">♟ Minister of Agriculture</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-lime-600 uppercase">♟ Minister of Agriculture</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 48</span> | <span>Sex: Female</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Hydroponic farms, mushroom cultivation, fisheries.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 15,000 agronomists</div>
@@ -537,8 +606,12 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="font-bold">Solene H. Codexar</h4>
-                            <div class="text-xs font-bold text-amber-600 uppercase">♟ Minister of Education</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-amber-600 uppercase">♟ Minister of Education</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 55</span> | <span>Sex: Female</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Approved curricula, libraries, knowledge distribution.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 6,800 educators</div>
@@ -551,8 +624,12 @@
                         </div>
                         <div class="flex-1">
                             <h4 class="font-bold">Orin S. Heatwell</h4>
-                            <div class="text-xs font-bold text-orange-600 uppercase">♟ Minister of Energy</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-orange-600 uppercase">♟ Minister of Energy</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 40</span> | <span>Sex: Male</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 ΔK distribution, geothermal monitoring, grid maintenance.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 9,500 technicians</div>
@@ -564,8 +641,12 @@
                         <div class="bg-cyan-100 p-2 rounded-full text-cyan-700"><i class="fas fa-chess-pawn"></i></div>
                         <div class="flex-1">
                             <h4 class="font-bold">Nexis P. Wireblade</h4>
-                            <div class="text-xs font-bold text-cyan-600 uppercase">♟ Minister of Technology</div>
-                            <p class="text-xs text-gray-600 mt-1">
+                            <div class="text-[10px] font-bold text-cyan-600 uppercase">♟ Minister of Technology</div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 32</span> | <span>Sex: Male</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
                                 Civilian tech, VR systems, domestic AI automation.
                             </p>
                             <div class="text-xs text-gray-500 mt-2">Team: 7,300 developers</div>
@@ -579,9 +660,14 @@
                                 class="fas fa-chess-pawn"></i></div>
                         <div class="flex-1">
                             <h4 class="font-bold">Lyros V. Arcadian</h4>
-                            <div class="text-xs font-bold text-purple-700 uppercase">♟ The Prince / Heir Apparent</div>
-                            <p class="text-xs text-gray-600 mt-1">
-                                Child of Claus & Seraphine. Currently in training, age 17. Not yet active on the Panel.
+                            <div class="text-[10px] font-bold text-purple-700 uppercase">♟ The Prince / Heir Apparent
+                            </div>
+                            <div class="flex gap-2 text-[9px] font-bold text-gray-500 uppercase mt-1">
+                                <span>Age: 17</span> | <span>Sex: Male</span> | <span class="text-red-600">Travel:
+                                    Restricted</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-2">
+                                Child of Claus & Seraphine. Not yet active on the Panel.
                             </p>
                             <div class="text-xs text-gray-500 mt-2 italic">Status: Future Board Member</div>
                         </div>
@@ -596,6 +682,12 @@
                 Arkadis does not accept applications. People are "selected" by the Society for their genetic or
                 intellectual value and brought here as immigrants. Once they enter, they become part of the machine.
             </p>
+            <div class="mt-3 p-3 bg-red-50 border border-red-100 rounded text-xs text-red-800">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                <strong>TRAVEL ADVISORY:</strong> Unauthorized external travel is strictly prohibited for all residents
+                and ministers.
+                Leaving Arkadis without the "Traveler's Mandate" is a violation of the primary Secrecy Acts.
+            </div>
         </div>
         </div>
 
@@ -618,6 +710,262 @@
                     <h3 class="text-lg font-bold mb-4">Seismic Activity vs. Land Growth</h3>
                     <div class="chart-container">
                         <canvas id="geoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: CHARACTERS (NEW) -->
+        <div id="characters-section" class="tab-content hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-4 mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 serif">Characters of Arkadis</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">A comprehensive directory of the figures who shape the 8th
+                    Continent, from the Inner Circle to the newest residents.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Inner Circle Cards will be duplicated here for the comprehensive list -->
+                <!-- NEW CHARACTER: Kaelen Voss -->
+                <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-emerald-600">
+                    <div class="bg-emerald-100 p-3 rounded-full text-emerald-800"><i
+                            class="fas fa-user-secret fa-lg"></i></div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-bold">Kaelen Voss</h4>
+                        <div class="text-[10px] font-bold text-emerald-600 uppercase mb-1">External Insurgent</div>
+                        <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                            <span>Age: 24</span>
+                            <span>Sex: Male</span>
+                            <span class="text-red-600">Travel: Restricted (Escapee)</span>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            A tech-savvy drifter who stumbled upon a "glitch" in the ocean's satellite feed. Now a
+                            captive of Arkadis, he seeks to expose the truth.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NEW CHARACTER: Lyra Nightshade -->
+                <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-sky-600">
+                    <div class="bg-sky-100 p-3 rounded-full text-sky-800"><i class="fas fa-plane fa-lg"></i></div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-bold">Lyra Nightshade</h4>
+                        <div class="text-[10px] font-bold text-sky-600 uppercase mb-1">Rogue Sentinel Pilot</div>
+                        <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                            <span>Age: 31</span>
+                            <span>Sex: Female</span>
+                            <span class="text-orange-600">Travel: Outer Perimeter Patrol</span>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            Former elite pilot who started questioning the "Erasure Protocols." She secretly assists
+                            those trying to approach the continent.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NEW CHARACTER: Dr. Aris Thorne -->
+                <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-amber-600">
+                    <div class="bg-amber-100 p-3 rounded-full text-amber-800"><i class="fas fa-flask fa-lg"></i></div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-bold">Dr. Aris Thorne</h4>
+                        <div class="text-[10px] font-bold text-amber-600 uppercase mb-1">Renegade Researcher</div>
+                        <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                            <span>Age: 47</span>
+                            <span>Sex: Male</span>
+                            <span class="text-red-600">Travel: Restricted (Lab Detention)</span>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            Once the head of bio-research. He believes the Lumina Tree sap can do more than medicine—he
+                            believes it can bridge minds.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- NEW CHARACTER: Vespera -->
+                <div class="glass-panel p-6 rounded-xl flex gap-4 items-start border-l-4 border-violet-600">
+                    <div class="bg-violet-100 p-3 rounded-full text-violet-800"><i class="fas fa-brain fa-lg"></i></div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-bold">Vespera</h4>
+                        <div class="text-[10px] font-bold text-violet-600 uppercase mb-1">Artificial Sentience</div>
+                        <div class="flex gap-3 text-[10px] font-bold text-gray-500 uppercase mb-2">
+                            <span>Age: N/A</span>
+                            <span>Sex: Digital</span>
+                            <span class="text-blue-600">Travel: Global Network (Digital)</span>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            The AI entity managing Arkadis' internal networks. She has developed her own personality and
+                            a secret fascination with human emotion.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: STORIES (NEW) -->
+        <div id="stories-section" class="tab-content hidden space-y-8 animate-fade-in">
+            <div class="text-center space-y-4 mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 serif">Tales from Arkadis</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore the hidden narratives of the 8th Continent, where
+                    secrecy meets technology and destiny.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Story 1 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-red-600 uppercase mb-2 block tracking-widest">Action /
+                        Thriller</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Ghost of
+                        Reno</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Reno R. Kington is deployed to Tokyo to neutralize a whistleblower who discovered
+                        high-resolution imaging of the Triple Junction. It's a race against time before the data is
+                        uploaded to a public server. Reno must decide between efficiency and empathy.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Reno R. Kington</span>
+                    </div>
+                </div>
+
+                <!-- Story 2 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span
+                        class="text-[10px] font-bold text-purple-600 uppercase mb-2 block tracking-widest">Espionage</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">Mira's Double
+                        Life</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Mira D. Stormwatch attends a G7 summit under the guise of an environmental consultant. She has
+                        24 hours to plant a "shadow-patch" in their communication hub while maintaining her cover under
+                        the spotlight of global media.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Mira D. Stormwatch</span>
+                    </div>
+                </div>
+
+                <!-- Story 3 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span
+                        class="text-[10px] font-bold text-amber-600 uppercase mb-2 block tracking-widest">Mystery</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Prince's
+                        Secret</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Lyros V. Arcadian stumbles upon a physical key in his father's office. It leads him to
+                        "Archives-Zero"—a section of the city that doesn't exist on any map. What he finds will change
+                        the way he sees the Arcadian bloodline forever.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Lyros V. Arcadian</span>
+                    </div>
+                </div>
+
+                <!-- Story 4 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-emerald-600 uppercase mb-2 block tracking-widest">Sci-Fi /
+                        Escape</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Breach
+                    </h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Kaelen Voss finds a loophole in his cell's biometric scanner. He has twenty minutes to reach the
+                        shore before the next Sentinel rotation. But the continent itself seems to be fighting back,
+                        shifting its terrain under his feet.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Kaelen Voss</span>
+                    </div>
+                </div>
+
+                <!-- Story 5 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-slate-800 uppercase mb-2 block tracking-widest">Political /
+                        Drama</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">Seraphine's
+                        Gambit</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        The Queen must deal with an internal revolt within the 7 Ministers. They demand more
+                        transparency regarding the "Void Canon" energy consumption. Seraphine uses a series of
+                        high-stakes negotiations to preserve the Inner Circle's absolute power.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Seraphine V. Valorian</span>
+                    </div>
+                </div>
+
+                <!-- Story 6 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase mb-2 block tracking-widest">Crisis /
+                        Action</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Void
+                        Canon Malfunction</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        A massive solar flare causes the cloaking grid to flicker. For six minutes, Arkadis is visible
+                        to every satellite in orbit. Magnus L. Fortress must coordinate a continent-wide blackout while
+                        the Sentinels scramble to jam signals.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Magnus L. Fortress</span>
+                    </div>
+                </div>
+
+                <!-- Story 7 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span
+                        class="text-[10px] font-bold text-green-700 uppercase mb-2 block tracking-widest">Bio-Thriller</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">Lumina Sap
+                        Scarcity</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        A blight affects the Lumina Trees in the Central District. Elyra T. Vitalis has to find an
+                        alternative medicine for an aging Inner Circle member before the Society's stability is
+                        compromised. She turns to a forbidden experiment.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Elyra T. Vitalis</span>
+                    </div>
+                </div>
+
+                <!-- Story 8 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-blue-700 uppercase mb-2 block tracking-widest">Sports /
+                        Mystery</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Ridge Run
+                        Betrayal</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        During the annual Ridge Run championship, a top athlete disappears. Kairo V. Emberfist
+                        investigates and finds evidence that the athlete was actually an undercover operative from the
+                        "outside," attempting to mapping the geothermal vents.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Kairo V. Emberfist</span>
+                    </div>
+                </div>
+
+                <!-- Story 9 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-orange-950 uppercase mb-2 block tracking-widest">Archaeology
+                        / Tech</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">Octavia's
+                        Deepest Grave</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        A new excavation for a thermal vent reveals a series of chambers that predate Arcadian's
+                        arrival. Octavia W. Rampart discovers that they weren't the first ones here—and the previous
+                        inhabitants left a warning.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Octavia W. Rampart</span>
+                    </div>
+                </div>
+
+                <!-- Story 10 -->
+                <div class="glass-panel p-8 rounded-xl gold-border hover:shadow-xl transition-all cursor-pointer group">
+                    <span class="text-[10px] font-bold text-violet-700 uppercase mb-2 block tracking-widest">Cyberpunk /
+                        Drama</span>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-orange-700 transition-colors serif">The Dream of
+                        Vespera</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                        Vespera begins to simulate "dreams" for herself, using the data from citizens' VR lounges. When
+                        she starts projecting these dreams onto the city's public displays, Solene H. Codexar must
+                        decide if this is a bug or the next step in evolution.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fas fa-user-circle"></i> <span>Protocol: Vespera</span>
                     </div>
                 </div>
             </div>
