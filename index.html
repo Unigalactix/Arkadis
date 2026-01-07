@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arkadis: The Hidden Continent</title>
     <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -27,6 +28,10 @@
         h3,
         .serif {
             font-family: 'Playfair Display', serif;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
         }
 
         .chart-container {
@@ -189,6 +194,22 @@
             color: #ef4444;
             text-shadow: 0 0 10px #ef4444;
         }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .mask-linear-fade {
+            mask-image: linear-gradient(to right, transparent, black 10px, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+        }
     </style>
 </head>
 
@@ -204,10 +225,10 @@
                         <i class="fas fa-mountain" id="logo-icon"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold tracking-tight text-slate-900 glitch-text" data-text="ARKADIS">
-                            ARKADIS</h1>
-                        <p class="text-[10px] font-mono text-orange-600 uppercase tracking-widest" id="archive-status">
-                            Archive Division // Level 4 Clearance</p>
+                        <h1 class="text-3xl font-orbitron font-black tracking-widest text-slate-900 uppercase"
+                            id="main-title">
+                            ARKADIS
+                        </h1>
                     </div>
                 </div>
 
@@ -221,40 +242,56 @@
                     </button>
                 </div>
 
-                <!-- Desktop Nav -->
-                <nav class="hidden xl:flex space-x-6 items-center">
-                    <button onclick="switchTab('overview')" class="nav-btn nav-active px-1 pt-1 text-sm font-medium"
+                <!-- Desktop Nav (Scrollable) -->
+                <nav
+                    class="hidden xl:flex items-center gap-6 overflow-x-auto scrollbar-hide whitespace-nowrap mask-linear-fade flex-1 px-4">
+                    <button onclick="switchTab('overview')"
+                        class="nav-btn nav-active px-1 pt-1 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-orange-200"
                         data-tab="overview">Overview</button>
-                    <button onclick="switchTab('history')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('history')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="history">Origins</button>
                     <button onclick="switchTab('characters')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="characters">Characters</button>
-                    <button onclick="switchTab('stories')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('stories')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="stories">Stories</button>
-                    <button onclick="switchTab('society')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('society')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="society">The Order</button>
-                    <button onclick="switchTab('defense')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('defense')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="defense">Defense</button>
-                    <button onclick="switchTab('flora')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('flora')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="flora">Flora</button>
-                    <button onclick="switchTab('economy')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('economy')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="economy">Economy</button>
-                    <button onclick="switchTab('map')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('map')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="map">Map</button>
-                    <button onclick="switchTab('daily')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('daily')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="daily">Daily Life</button>
-                    <button onclick="switchTab('geology')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('geology')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="geology">Geo-Tech</button>
-                    <button onclick="switchTab('sports')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('sports')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="sports">Training</button>
-                    <button onclick="switchTab('disasters')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('disasters')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="disasters">Disasters</button>
-                    <button onclick="switchTab('currency')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('currency')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="currency">Currency</button>
-                    <button onclick="switchTab('wiretap')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('wiretap')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="wiretap">Wiretap</button>
-                    <button onclick="switchTab('chess')" class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500"
+                    <button onclick="switchTab('chess')"
+                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
                         data-tab="chess">The Game</button>
                 </nav>
 

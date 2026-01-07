@@ -37,6 +37,7 @@
 2.  **Seraphine Valorian (Queen)**: 42, Female. The Strategist. Master of poisons. Controlling mother to Lyros.
 3.  **Reno R. Kington (Knight)**: 35, Male. **THE PROTAGONIST**.
     - *Role*: "Knight of Erasure" (Assassin/Enforcer).
+    - *Lore*: **"Mr. Arkadis" (2011)**. The only Undefeated Grand Champion of the Arena.
     - *Conflict*: Torn between duty, his wife (Elara), and his rebel lover (Sariel).
     - *Stats*: High Combat/Tech.
 4.  **Lucian Shadowend (Bishop)**: 68. Keeper of Knowledge/Surveillance.
