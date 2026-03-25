@@ -2,6 +2,7 @@ import { overviewModule } from './modules/overview.js';
 import { historyModule } from './modules/history.js';
 import { charactersModule } from './modules/characters.js';
 import { storiesModule } from './modules/stories.js';
+import { episodesModule } from './modules/episodes.js';
 import { societyModule } from './modules/society.js';
 import { defenseModule } from './modules/defense.js';
 import { floraModule } from './modules/flora.js';
@@ -24,6 +25,7 @@ const modules = {
     history: historyModule,
     characters: charactersModule,
     stories: storiesModule,
+    episodes: episodesModule,
     society: societyModule,
     defense: defenseModule,
     flora: floraModule,

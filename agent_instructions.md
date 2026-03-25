@@ -24,6 +24,11 @@
 - **`js/modules/map.js`**: Home of the **Satellite Map**.
   - *Rule*: Must use `image.png` as the source.
   - *Rule*: Must include the **3D Tiered Topology** (Vertical Slice).
+- **`js/modules/episodes.js` + `js/modules/episodes_data.js`**: Home of the **2027 Episode Archive**.
+  - *Rule*: Keep episode records in `episodes_data.js` and UI/render/search logic in `episodes.js`.
+  - *Rule*: Maintain 44 episode timeline scaffold unless explicitly asked to expand.
+  - *Rule*: Preserve arc progression: Episodes 1-10 outside Arkadis, 11-29 inside Arkadis, 30 queen reveal, 31-44 conflict close.
+  - *Rule*: Keep continuity metadata fields (`location`, `pov`, `timelineDay`, `keyCharacters`) for each episode.
 - **`js/modules/terminal.js`**: Home of the **Intercepted Comms**.
   - *Rule*: Floating entry field for secret codes (e.g., JXN-01).
 
@@ -118,8 +123,10 @@
     *   **Style**: CRT monitor, live typing simulation.
 *   **Holographic Cards (`society.js`)**:
     *   **Effect**: 3D Mouse-tracking Tilt + Dynamic Glare.
+*   **Episodes Archive (`episodes.js`)**:
+  *   **Function**: 44-episode planner with arc chips, quick filters, search, status badges, counters, and expandable draft placeholders.
 *   **Global CRT Overlay**:
-    *   **Effect**: Scanlines, Vignette, Chromatic Aberration (pointer-events-none).
+  *   **Status**: Removed from `index.html` for visual clarity/performance in the current build.
 
 ## 7. ASSET MANIFEST
 *   **Favicon**: `favicon.png` (Stylized 'A' - Gold/Slate).

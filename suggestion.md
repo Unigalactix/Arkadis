@@ -1,45 +1,40 @@
 # Suggestions for Future Improvements
 
-To further enhance the **Arkadis Project**, consider the following technical and narrative expansions:
+This document tracks practical next steps after recent upgrades (Episodes tab, markdown refresh, cleanup pass).
 
-## 1. Technical Enhancements
+## 1. Priority Improvements
 
-### Dynamic Data Integration
-> [!TIP]
-> Instead of hardcoding all data within modules, implement a central `data.json` or a lightweight backend/JSON file. This would allow for easier updates to character stats, story fragments, and economic indicators without touching the code.
+### Persist Episode Authoring State
+Save episode workflow fields to `localStorage` so filters, search query, expanded placeholders, and future draft text survive refreshes.
 
-### Robust State Management
-Currently, the state is handled globally in `app.js`. Implementing a more formal state management pattern (like a simple Store pattern) would allow for:
-- Saving selection test results to `localStorage`.
-- Tracking which stories the user has read.
-- Persisting the last active tab across page refreshes.
+### Add a Lightweight Episode Editor Flow
+Introduce an edit mode per card that can update title, summary, status, and continuity metadata directly, then export JSON for versioned commits.
 
-### Advanced Visualization
-Integrate **D3.js** for the map to allow for:
-- Zooming and panning.
-- Interactive tooltips that pull data from the character modules.
-- Dynamic paths showing the "Hydra-Transit Network" in action.
+### Extend Episode Dataset Strategy
+Keep `episodes_data.js` for now, but prepare migration to a structured `data/episodes.json` + validation schema once episode count grows significantly.
 
 ---
 
-## 2. Content & Narrative Expansion
+## 2. Narrative and Worldbuilding Enhancements
 
-### The "Wild Zones" Interactive Experience
-Create a dedicated sub-module or interactive game element for the **Wild Zones**. This could involve a narrative-driven survival simulator where users make choices as characters like Kaelen Voss.
+### Expand Arc Beyond Episode 44
+Continue the same metadata-backed structure for episodes 45-444 in staged batches (for example 45-80 first) to keep review manageable.
 
-### Detailed Character Relationship Map
-> [!IMPORTANT]
-> Since relationships (like Reno's wife vs. secret lover) are becoming more complex, a **Relationship Map** (using Mermaid.js or a custom SVG) within the Characters tab would visualy show the conflict and connections.
+### Wild Zones Interactive Chronicle
+Add a dedicated Wild Zones tab with expedition logs, branching outcomes, and environmental hazards linked to map and defense modules.
 
-### "Live" Defense Feeds
-Integrate a "Terminal" style panel that shows real-time (simulated) logs from the **Sentinel Drones** or **Void Canon** status, enhancing the "internal archive" feel.
+### Society Dossier Progression
+Evolve the current Order modal into a chain-aware intelligence timeline showing lineage shifts, partner changes, and major political events by year.
 
 ---
 
-## 3. Performance & Architecture
+## 3. Performance and Architecture
 
-### Lazy Loading Modules
-For even better performance, use dynamic imports `import()` inside the `switchTab` function to only load the code for a module when the user actually clicks the tab.
+### Dynamic Module Loading
+Use dynamic imports in `switchTab` so heavyweight modules initialize only when requested, improving first-load responsiveness.
 
-### CSS Modularization
-Currently, all CSS is in the `index.html` shell. Moving some component-specific styles into CSS variables within the modules or separate CSS files would improve maintainability.
+### Shared UI Utility Layer
+Extract repeated card/chip/badge markup builders into reusable helpers for consistency across `stories`, `society`, and `episodes`.
+
+### CSS Separation
+Move global styles from `index.html` into a dedicated stylesheet and keep module-specific micro-styles near each module to simplify maintenance.

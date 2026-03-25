@@ -30,6 +30,8 @@ Arkadis/
 |     |- defense.js
 |     |- disasters.js
 |     |- economy.js
+|     |- episodes.js
+|     |- episodes_data.js
 |     |- flora.js
 |     |- geology.js
 |     |- history.js
@@ -76,6 +78,7 @@ npx serve .
 
 - Lore and historical archive
 - Character dossiers and relationships
+- Episode timeline planner with filters/search/status and draft placeholders
 - The Order governance panel
 - Defense and disaster systems
 - Economy and currency intelligence
@@ -92,6 +95,7 @@ npx serve .
 
 - Keep module APIs consistent (`render` + `init`).
 - Prefer small, focused changes inside the relevant module file.
+- Keep large narrative datasets in dedicated data modules (for example `episodes_data.js`) and keep UI logic in renderer modules.
 - If adding a new tab:
   1. Create a new module in `js/modules/`.
   2. Import it in `js/app.js`.
