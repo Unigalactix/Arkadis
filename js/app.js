@@ -81,12 +81,10 @@ function toggleUnveiledMode() {
         body.classList.add('unveiled-mode');
         document.getElementById('mode-toggle').innerHTML = '<i class="fas fa-eye-slash"></i>';
         document.getElementById('toggle-label').textContent = 'THE UNVEILED';
-        document.getElementById('archive-status').innerHTML = "REBEL LEAK // <span class='animate-pulse text-red-500'>SIGNAL INTERCEPTED</span>";
     } else {
         body.classList.remove('unveiled-mode');
         document.getElementById('mode-toggle').innerHTML = '<i class="fas fa-eye"></i>';
         document.getElementById('toggle-label').textContent = 'THE ORDER';
-        document.getElementById('archive-status').textContent = 'Archive Division // Level 4 Clearance';
     }
 
     // Play Mode Switch Audio

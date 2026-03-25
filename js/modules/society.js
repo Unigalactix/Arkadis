@@ -148,6 +148,115 @@ const characterData = {
     }
 };
 
+const orderIntel = {
+    king: {
+        lineage: ["Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Noctis Arcadian", "Founder Arcadian"],
+        partners: ["Seraphine V. Valorian (Consort)"],
+        affairs: ["Elara Quin (Archived, ended 2016)"]
+    },
+    queen: {
+        lineage: ["Valera Valorian", "Isolde Valorian", "Celene Valorian", "Myra Valorian", "Aurea Valorian", "Eleanora Valorian", "Matriarch Valorian"],
+        partners: ["Claus Arcadian (Primary Bond)"],
+        affairs: ["Lucian M. Shadowend (Classified liaison)"]
+    },
+    reno: {
+        lineage: ["Ronan Kington", "Darian Kington", "Mikel Kington", "Varric Kington", "Edrin Kington", "Silas Kington", "House Kington Patriarch"],
+        partners: ["Mira D. Stormwatch (Operational Partner)"],
+        affairs: ["Ilya Nox (Foreign contact, active)"]
+    },
+    bish_know: {
+        lineage: ["Malric Shadowend", "Caelum Shadowend", "Orven Shadowend", "Jarek Shadowend", "Saelor Shadowend", "Nymus Shadowend", "Archivist Shadowend"],
+        partners: ["Selene Orac (Civil Union)"],
+        affairs: ["None detected"]
+    },
+    bish_doc: {
+        lineage: ["Elias Veyrath", "Cyran Veyrath", "Doman Veyrath", "Rethan Veyrath", "Korvin Veyrath", "Tiber Veyrath", "Patriarch Veyrath"],
+        partners: ["No registered partner"],
+        affairs: ["Liora Senn (Doctrinal attaché)"]
+    },
+    kni_infil: {
+        lineage: ["Darius Stormwatch", "Maven Stormwatch", "Iris Stormwatch", "Kael Stormwatch", "Soren Stormwatch", "Helia Stormwatch", "Watchline Founder"],
+        partners: ["Reno R. Kington (Unregistered bond)"],
+        affairs: ["Adrian Voss (Counterintel asset)"]
+    },
+    rook_def: {
+        lineage: ["Leoric Fortress", "Magnor Fortress", "Bran Fortress", "Garron Fortress", "Taric Fortress", "Dram Fortress", "Warden Fortress"],
+        partners: ["Petra Coldwall (Spouse)"],
+        affairs: ["None detected"]
+    },
+    rook_infra: {
+        lineage: ["Wren Rampart", "Alaric Rampart", "Veyna Rampart", "Corin Rampart", "Mira Rampart", "Eron Rampart", "Builder Rampart"],
+        partners: ["No registered partner"],
+        affairs: ["Thorne Halvek (Infrastructure contractor)"]
+    },
+    min_infra: {
+        lineage: ["Kellan Steelwork", "Darius Steelwork", "Maren Steelwork", "Hector Steelwork", "Vira Steelwork", "Ansel Steelwork", "Founder Steelwork"],
+        partners: ["Yara Flint (Spouse)"],
+        affairs: ["None detected"]
+    },
+    min_health: {
+        lineage: ["Tarin Vitalis", "Nysa Vitalis", "Edria Vitalis", "Ruvan Vitalis", "Calix Vitalis", "Mora Vitalis", "Healer Vitalis"],
+        partners: ["Darian Kest (Companion)"],
+        affairs: ["None detected"]
+    },
+    min_train: {
+        lineage: ["Varun Emberfist", "Jorah Emberfist", "Kai Emberfist", "Rok Emberfist", "Narin Emberfist", "Tov Emberfist", "Champion Emberfist"],
+        partners: ["No registered partner"],
+        affairs: ["Sable Rynn (Sparring captain)"]
+    },
+    min_agri: {
+        lineage: ["Mira Rootvein", "Tallis Rootvein", "Brina Rootvein", "Elowen Rootvein", "Noren Rootvein", "Syla Rootvein", "Seedkeeper Rootvein"],
+        partners: ["Orin S. Heatwell (Declared partner)"],
+        affairs: ["None detected"]
+    },
+    min_edu: {
+        lineage: ["Halen Codexar", "Beryl Codexar", "Caspian Codexar", "Luma Codexar", "Vel Codexar", "Idra Codexar", "Scribe Codexar"],
+        partners: ["Cassian E. Veyrath (Marital contract)"],
+        affairs: ["None detected"]
+    },
+    min_energy: {
+        lineage: ["Soren Heatwell", "Corvin Heatwell", "Eris Heatwell", "Drax Heatwell", "Nelia Heatwell", "Vorn Heatwell", "Pyrewell Ancestor"],
+        partners: ["No registered partner"],
+        affairs: ["Elyra T. Vitalis (Undeclared)"]
+    },
+    min_tech: {
+        lineage: ["Pax Wireblade", "Nero Wireblade", "Lune Wireblade", "Zerin Wireblade", "Tor Wireblade", "Meka Wireblade", "Nodekeeper Wireblade"],
+        partners: ["No registered partner"],
+        affairs: ["Mira D. Stormwatch (Encrypted contact)"]
+    },
+    prince: {
+        lineage: ["Claus Arcadian", "Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Founder Arcadian"],
+        partners: ["No declared partner"],
+        affairs: ["None detected"]
+    }
+};
+
+function buildLineage(memberId, memberName) {
+    const intel = orderIntel[memberId];
+    if (intel && Array.isArray(intel.lineage) && intel.lineage.length >= 7) {
+        return intel.lineage.slice(0, 7);
+    }
+
+    const surname = memberName.split(' ').slice(-1)[0] || 'Unknown';
+    return [
+        `Direct Parent ${surname}`,
+        `Grandparent ${surname}`,
+        `Great-Grandparent ${surname}`,
+        `4th Ascendant ${surname}`,
+        `5th Ascendant ${surname}`,
+        `6th Ascendant ${surname}`,
+        `7th Ascendant ${surname}`
+    ];
+}
+
+function getRelationshipIntel(memberId) {
+    const intel = orderIntel[memberId] || {};
+    return {
+        partners: intel.partners && intel.partners.length ? intel.partners : ['No registered partner'],
+        affairs: intel.affairs && intel.affairs.length ? intel.affairs : ['None detected']
+    };
+}
+
 export const societyModule = {
     render: () => `
         <div id="society-section" class="tab-content hidden space-y-8 animate-fade-in pb-24">
@@ -449,6 +558,30 @@ export const societyModule = {
                             </div>
                         </div>
 
+                        <!-- Bloodline -->
+                        <div>
+                            <button id="modal-bloodline-toggle" type="button" aria-expanded="false"
+                                class="w-full flex items-center justify-between text-left text-xs font-bold text-gray-400 uppercase mb-2 hover:text-gray-600 transition-colors">
+                                <span>Bloodline Archive (7 Generations)</span>
+                                <span id="modal-bloodline-toggle-label" class="text-[10px] text-gray-500">Show</span>
+                            </button>
+                            <div id="modal-bloodline-wrapper" class="hidden">
+                                <div id="modal-bloodline" class="space-y-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- Relationship Intelligence -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                                <h4 class="text-[10px] font-bold text-blue-700 uppercase mb-2 flex items-center gap-1"><i class="fas fa-link"></i> Current Partners</h4>
+                                <ul id="modal-partners" class="text-[10px] text-blue-900 space-y-1 ml-2"></ul>
+                            </div>
+                            <div class="bg-rose-50 p-4 rounded-lg border border-rose-100">
+                                <h4 class="text-[10px] font-bold text-rose-700 uppercase mb-2 flex items-center gap-1"><i class="fas fa-user-secret"></i> Affairs</h4>
+                                <ul id="modal-affairs" class="text-[10px] text-rose-900 space-y-1 ml-2"></ul>
+                            </div>
+                        </div>
+
                         <!-- History -->
                         <div>
                             <h4 class="text-xs font-bold text-gray-400 uppercase mb-2">Travel History</h4>
@@ -488,6 +621,12 @@ export const societyModule = {
         const elStrengths = document.getElementById('modal-strengths');
         const elWeaknesses = document.getElementById('modal-weaknesses');
         const elHistory = document.getElementById('modal-history');
+        const elBloodline = document.getElementById('modal-bloodline');
+        const elBloodlineWrapper = document.getElementById('modal-bloodline-wrapper');
+        const elBloodlineToggle = document.getElementById('modal-bloodline-toggle');
+        const elBloodlineToggleLabel = document.getElementById('modal-bloodline-toggle-label');
+        const elPartners = document.getElementById('modal-partners');
+        const elAffairs = document.getElementById('modal-affairs');
 
         // Stat Bars
         const statAuth = document.getElementById('stat-auth');
@@ -500,9 +639,18 @@ export const societyModule = {
         const valComb = document.getElementById('val-comb');
         const valTech = document.getElementById('val-tech');
 
+        function setBloodlineExpanded(expanded) {
+            elBloodlineWrapper.classList.toggle('hidden', !expanded);
+            elBloodlineToggle.setAttribute('aria-expanded', String(expanded));
+            elBloodlineToggleLabel.textContent = expanded ? 'Hide' : 'Show';
+        }
+
         function openModal(id) {
             const data = characterData[id];
             if (!data) return;
+            const bloodline = buildLineage(id, data.name);
+            const relationshipIntel = getRelationshipIntel(id);
+            setBloodlineExpanded(false);
 
             elName.textContent = data.name;
             elRole.textContent = data.role;
@@ -522,6 +670,14 @@ export const societyModule = {
             // Lists
             elStrengths.innerHTML = data.strengths.map(s => `<li>• ${s}</li>`).join('');
             elWeaknesses.innerHTML = data.weaknesses.map(w => `<li>• ${w}</li>`).join('');
+            elPartners.innerHTML = relationshipIntel.partners.map(p => `<li>• ${p}</li>`).join('');
+            elAffairs.innerHTML = relationshipIntel.affairs.map(a => `<li>• ${a}</li>`).join('');
+
+            elBloodline.innerHTML = bloodline.map((ancestor, index) =>
+                `<div class="flex items-center gap-2 p-2 bg-amber-50 rounded border border-amber-100 text-[10px] text-amber-900">
+                    <i class="fas fa-dna text-amber-500"></i> Gen -${index + 1}: ${ancestor}
+                </div>`
+            ).join('');
 
             elHistory.innerHTML = data.history.map(h =>
                 `<div class="flex items-center gap-2 p-2 bg-gray-50 rounded border border-gray-100 text-[10px] text-gray-600">
@@ -544,6 +700,15 @@ export const societyModule = {
 
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
+        elBloodlineToggle.addEventListener('click', () => {
+            const expanded = elBloodlineToggle.getAttribute('aria-expanded') === 'true';
+            setBloodlineExpanded(!expanded);
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
 
         // HOLOGRAPHIC TILT EFFECT
         cards.forEach(card => {
