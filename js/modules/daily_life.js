@@ -2,12 +2,17 @@ export const dailyLifeModule = {
     render: () => `
         <div id="selection-section" class="tab-content hidden space-y-8">
             <div class="bg-gradient-to-r from-purple-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl text-center">
+                <div class="cast-medallion mx-auto mb-4" style="width:3.5rem;height:3.5rem;font-size:1.3rem;--badge-ring-1: rgba(126,34,206,0.3); background: linear-gradient(135deg, #7e22ce, #4c1d95);">
+                    <i class="fas fa-clipboard-question"></i>
+                </div>
                 <h2 class="text-3xl font-bold mb-4">Are You Worthy of Selection?</h2>
                 <p class="text-slate-300 max-w-2xl mx-auto">
                     Only 0.001% of humanity possesses the qualities we seek. Take this assessment to discover if you
                     would be considered for immigration.
                 </p>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <div class="glass-panel p-8 rounded-xl max-w-3xl mx-auto">
                 <div id="test-questions" class="space-y-6">

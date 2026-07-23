@@ -6,42 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arkadis: The Hidden Continent</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@700&family=Cinzel:wght@400;600;700;900&family=Caveat:wght@500;600;700&family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            --premium-bg-top: #fcfaf5;
-            --premium-bg-bottom: #f2ede2;
-            --premium-text: #1c2430;
-            --premium-accent: #9a6a2f;
-            --premium-accent-muted: rgba(154, 106, 47, 0.3);
-            --premium-header-bg: rgba(252, 250, 245, 0.8);
-            --premium-panel-bg: rgba(255, 255, 255, 0.9);
-            --premium-panel-border: rgba(154, 106, 47, 0.14);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
+            /* --- Paper Diorama: soft, rounded, layered 3D paper-craft (like a storybook shadow-box) --- */
+            --paper-bg: #faf1de;
+            --paper-bg-soft: #f3e6c8;
+            --paper-card: #fffdf8;
+            --paper-card-alt: #f6ecd6;
+            --ink: #3a2f22;
+            --ink-soft: #6b5a42;
+            --ink-faint: rgba(58, 47, 34, 0.55);
+            --paper-edge: rgba(58, 47, 34, 0.12);
+            --paper-header-bg: #2b2116;
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+
+            /* --- Trinity Accord: Hellenic + Vedic + Byzantine paper-layer accent colors --- */
+            --hue-hellenic-gold: #c9a227;
+            /* Greek laurel/temple gold */
+            --hue-vedic-saffron: #e08e1d;
+            /* Hindu saffron / turmeric */
+            --hue-vedic-vermilion: #c6402b;
+            /* Hindu sindoor / vermilion */
+            --hue-byzantine-burgundy: #6b1d2e;
+            /* Byzantine imperial mosaic burgundy */
+            --hue-byzantine-teal: #0f6b66;
+            /* Peacock / Byzantine glass teal */
+            --trinity-gradient: linear-gradient(90deg,
+                    var(--hue-hellenic-gold) 0%,
+                    var(--hue-vedic-saffron) 30%,
+                    var(--hue-vedic-vermilion) 55%,
+                    var(--hue-byzantine-burgundy) 85%,
+                    var(--hue-hellenic-gold) 100%);
+
+            --shadow-soft-sm: 0 4px 10px rgba(58, 47, 34, 0.12), 0 1px 3px rgba(58, 47, 34, 0.10);
+            --shadow-soft-md: 0 12px 26px rgba(58, 47, 34, 0.14), 0 3px 8px rgba(58, 47, 34, 0.10);
+            --shadow-soft-lg: 0 24px 48px rgba(58, 47, 34, 0.18), 0 8px 16px rgba(58, 47, 34, 0.12);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, var(--premium-bg-top) 0%, var(--premium-bg-bottom) 100%);
-            color: var(--premium-text);
+            font-family: 'Lora', 'Inter', serif;
+            color: var(--ink);
+            background: var(--paper-bg);
         }
 
         h1,
         h2,
-        h3,
+        h3 {
+            font-family: 'Cinzel', 'Playfair Display', serif;
+        }
+
         .serif {
             font-family: 'Playfair Display', serif;
+        }
+
+        .chip-vibrant {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.3), rgba(198, 64, 43, 0.22));
+            border: none;
+            color: var(--ink);
+            font-weight: 700;
+            border-radius: 999px;
+            box-shadow: var(--shadow-soft-sm);
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', 'Playfair Display', serif;
         }
 
         .font-orbitron {
@@ -62,72 +101,379 @@
             }
         }
 
+        /* --- Premium grouped nav: frosted-glass pill bar + floating dropdowns --- */
+        #desktop-nav {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 999px;
+            padding: 0.3rem;
+            gap: 0.2rem;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
         .nav-btn {
-            color: rgba(28, 36, 48, 0.72);
-            letter-spacing: 0.015em;
-            border-radius: var(--radius-sm);
+            position: relative;
+            color: rgba(232, 220, 190, 0.8);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.01em;
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            border: none !important;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
         }
 
         .nav-btn:hover {
-            color: var(--premium-text);
-            border-bottom-color: var(--premium-accent-muted) !important;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.10);
+            border-bottom-color: transparent !important;
+            transform: translateY(-1px);
         }
 
-        .nav-active {
-            border-bottom: 1px solid var(--premium-accent);
-            color: var(--premium-accent);
+        .nav-btn.nav-active,
+        .nav-group.nav-group-active>.nav-btn {
+            background: var(--trinity-gradient) !important;
+            background-size: 200% 100% !important;
+            color: #1c150c !important;
+            box-shadow: var(--shadow-soft-sm);
+        }
+
+        .nav-chevron {
+            margin-left: 0.15rem;
+            transition: transform 0.2s ease;
+            opacity: 0.7;
+        }
+
+        .nav-group.nav-group-open .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px) scale(0.98);
+            min-width: 230px;
+            background: #241a10;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-soft-lg);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+            z-index: 60;
+        }
+
+        .nav-group:last-child .nav-dropdown {
+            left: auto;
+            right: 0;
+            transform: translateY(-6px) scale(0.98);
+        }
+
+        .nav-group.nav-group-open .nav-dropdown {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .nav-group:last-child.nav-group-open .nav-dropdown {
+            transform: translateY(0) scale(1);
+        }
+
+        .nav-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            width: 100%;
+            text-align: left;
+            padding: 0.55rem 0.7rem;
+            border-radius: var(--radius-sm);
+            color: rgba(232, 220, 190, 0.85);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+
+        .nav-dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .nav-dropdown-item.nav-active {
+            background: rgba(201, 162, 39, 0.18);
+            color: var(--hue-hellenic-gold);
+            font-weight: 700;
+        }
+
+        .nav-dropdown-icon {
+            width: 1.4rem;
+            text-align: center;
+            opacity: 0.85;
         }
 
         .glass-panel {
-            background: var(--premium-panel-bg);
-            border: 1px solid var(--premium-panel-border);
+            background: var(--paper-card);
+            border: none;
             border-radius: var(--radius-md);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            box-shadow: 0 12px 34px -22px rgba(17, 24, 39, 0.35);
+            box-shadow:
+                0 6px 0 -2px var(--paper-card-alt),
+                var(--shadow-soft-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 9px 0 -2px var(--paper-card-alt),
+                var(--shadow-soft-lg);
+        }
+
+        /* Trinity Accord motif: every panel carries the Hellenic gold / Vedic saffron-vermilion /
+           Byzantine burgundy thread across its top edge, like a ribbon binding the cut-paper card. */
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--trinity-gradient);
+            background-size: 200% 100%;
+            opacity: 0.95;
+            animation: trinityShimmer 7s linear infinite;
+        }
+
+        @keyframes trinityShimmer {
+            0% {
+                background-position: 0% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
         }
 
         .gold-border {
-            border-left: 4px solid var(--premium-accent);
+            border-left: 4px solid var(--hue-vedic-saffron);
+            position: relative;
+        }
+
+        .gold-border::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                    var(--hue-hellenic-gold),
+                    var(--hue-vedic-saffron),
+                    var(--hue-byzantine-burgundy));
         }
 
         .site-header {
-            background: var(--premium-header-bg);
-            border-bottom: 1px solid rgba(154, 106, 47, 0.12);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 28px -24px rgba(17, 24, 39, 0.55);
+            background: var(--paper-header-bg);
+            background-image:
+                radial-gradient(ellipse at 50% -30%, rgba(201, 162, 39, 0.22), transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Cg fill='%23e8dcbe' opacity='0.55'%3E%3Ccircle cx='18' cy='22' r='1.4'/%3E%3Ccircle cx='72' cy='48' r='1'/%3E%3Ccircle cx='128' cy='16' r='1.6'/%3E%3Ccircle cx='168' cy='58' r='1'/%3E%3Ccircle cx='42' cy='75' r='1.2'/%3E%3Ccircle cx='200' cy='32' r='1'/%3E%3Ccircle cx='95' cy='90' r='1.1'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: no-repeat, repeat;
+            box-shadow:
+                0 8px 0 -4px var(--hue-hellenic-gold),
+                var(--shadow-soft-md),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            position: relative;
+        }
+
+        .cultural-footer {
+            background: var(--paper-header-bg);
+            background-image:
+                radial-gradient(ellipse at 50% 130%, rgba(15, 107, 102, 0.28), transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110'%3E%3Cg fill='%23e8dcbe' opacity='0.4'%3E%3Ccircle cx='18' cy='22' r='1.4'/%3E%3Ccircle cx='72' cy='48' r='1'/%3E%3Ccircle cx='128' cy='16' r='1.6'/%3E%3Ccircle cx='168' cy='58' r='1'/%3E%3Ccircle cx='42' cy='75' r='1.2'/%3E%3Ccircle cx='200' cy='32' r='1'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: no-repeat, repeat;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            box-shadow:
+                0 -8px 0 -4px var(--hue-byzantine-teal),
+                var(--shadow-soft-md);
+            position: relative;
         }
 
         #brand-mark {
-            border-radius: var(--radius-md);
-            box-shadow: 0 10px 24px -18px rgba(15, 23, 42, 0.7);
-            color: var(--premium-accent);
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #2b2116 0%, #4a2233 55%, #5c3a0e 100%);
+            box-shadow: var(--shadow-soft-sm), 0 0 0 2px rgba(201, 162, 39, 0.45);
+            color: var(--hue-hellenic-gold);
             position: relative;
             overflow: hidden;
-            filter: saturate(0.86);
         }
 
         #brand-mark::before {
             content: '';
             position: absolute;
             inset: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: calc(var(--radius-md) - 2px);
             pointer-events: none;
         }
 
         #main-title {
-            color: var(--premium-text);
+            color: var(--hue-hellenic-gold);
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            letter-spacing: 0.12em;
         }
 
         #mobile-nav {
-            background: rgba(252, 250, 245, 0.92);
-            border-bottom: 1px solid rgba(154, 106, 47, 0.12);
+            background: var(--paper-header-bg);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            box-shadow: var(--shadow-soft-md);
         }
 
-        #mobile-nav button {
+        .mobile-nav-toggle {
+            color: rgba(232, 220, 190, 0.85);
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            transition: background 0.2s ease;
+        }
+
+        .mobile-nav-toggle:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .mobile-nav-link,
+        .mobile-nav-group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.65rem 0.9rem;
             border-radius: var(--radius-sm);
+            color: rgba(232, 220, 190, 0.85);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-group-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--hue-hellenic-gold);
+        }
+
+        .mobile-nav-link.nav-active {
+            background: var(--hue-hellenic-gold);
+            color: var(--paper-header-bg);
+        }
+
+        .mobile-nav-group.mobile-nav-group-active>.mobile-nav-group-header {
+            color: var(--hue-hellenic-gold);
+        }
+
+        .mobile-nav-sub {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+            padding-left: 0.75rem;
+        }
+
+        .mobile-nav-group.mobile-nav-group-open .mobile-nav-sub {
+            max-height: 22rem;
+        }
+
+        .mobile-nav-sublink {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            color: rgba(232, 220, 190, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .mobile-nav-sublink:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .mobile-nav-sublink.nav-active {
+            background: rgba(201, 162, 39, 0.18);
+            color: var(--hue-hellenic-gold);
+            font-weight: 700;
+        }
+
+        /* --- Storyboard: main content is a soft, rounded, layered paper-diorama panel --- */
+        #main-content {
+            background: var(--paper-card);
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow:
+                0 10px 0 -4px var(--paper-card-alt),
+                var(--shadow-soft-lg);
+            position: relative;
+            margin: 1.5rem auto 2.5rem;
+        }
+
+        .storyboard-chapter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 2px solid var(--paper-edge);
+        }
+
+        .storyboard-chapter .chapter-number {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            width: 2.75rem;
+            height: 2.75rem;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2b2116 0%, #4a2233 55%, #5c3a0e 100%);
+            color: var(--hue-hellenic-gold);
+            box-shadow: var(--shadow-soft-sm), 0 0 0 2px rgba(201, 162, 39, 0.35);
+        }
+
+        .storyboard-chapter .chapter-label {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.02em;
+        }
+
+        @keyframes pageTurn {
+            from {
+                opacity: 0;
+                transform: perspective(1200px) rotateY(-4deg) translateX(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(1200px) rotateY(0) translateX(0);
+            }
+        }
+
+        .animate-page-turn {
+            animation: pageTurn 0.45s ease-out both;
+            transform-origin: left center;
         }
 
         .timeline-item {
@@ -145,7 +491,8 @@
             width: 0.8rem;
             height: 0.8rem;
             border-radius: 50%;
-            background: #b45309;
+            background: var(--hue-vedic-saffron);
+            box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.25);
         }
 
         .timeline-item:last-child {
@@ -168,100 +515,6 @@
             }
         }
 
-        /* UNVEILED MODE (REBEL THEME) */
-        body.unveiled-mode {
-            background-color: #0c0a09;
-            color: #fca5a5;
-            filter: contrast(1.1) brightness(0.9);
-        }
-
-        .unveiled-mode header {
-            background-color: #1c1917;
-            border-bottom: 2px solid #7f1d1d;
-        }
-
-        .unveiled-mode header h1 {
-            color: #f87171;
-        }
-
-        .unveiled-mode .nav-btn {
-            color: #fca5a5;
-        }
-
-        .unveiled-mode .nav-active {
-            border-bottom-color: #7f1d1d;
-            color: #ef4444;
-        }
-
-        .unveiled-mode .glass-panel {
-            background: rgba(28, 25, 23, 0.95);
-            border-color: rgba(127, 29, 29, 0.4);
-        }
-
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-
-        .unveiled-mode .glitch-text::before,
-        .unveiled-mode .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .unveiled-mode .glitch-text::before {
-            color: #ef4444;
-            z-index: -1;
-            animation: glitch 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-        }
-
-        .unveiled-mode .glitch-text::after {
-            color: #06b6d4;
-            z-index: -2;
-            animation: glitch 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-        }
-
-        @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-
-            20% {
-                transform: translate(-2px, 2px);
-            }
-
-            40% {
-                transform: translate(-2px, -2px);
-            }
-
-            60% {
-                transform: translate(2px, 2px);
-            }
-
-            80% {
-                transform: translate(2px, -2px);
-            }
-
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        .toggle-unveiled {
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .unveiled-mode .toggle-unveiled {
-            color: #ef4444;
-            text-shadow: 0 0 10px #ef4444;
-        }
-
         /* Hide scrollbar for Chrome, Safari and Opera */
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
@@ -277,6 +530,203 @@
             mask-image: linear-gradient(to right, transparent, black 10px, black 95%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
         }
+
+        /* --- Paper-cut decorative kit: handwritten tags, torn dividers, cardstock scrollbar --- */
+        .paper-tag {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            color: var(--ink);
+            display: inline-block;
+            transform: rotate(-1.5deg);
+        }
+
+        .torn-divider {
+            height: 10px;
+            background-image: radial-gradient(circle, var(--hue-hellenic-gold) 3px, transparent 3.2px);
+            background-size: 22px 10px;
+            background-position: center;
+            background-repeat: repeat-x;
+            opacity: 0.6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--paper-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ink-soft);
+            border-radius: 999px;
+            border: 2px solid var(--paper-bg);
+        }
+
+        /* ============================================================
+           PHASE 1 — PAPER DIORAMA SCENE KIT
+           Reusable illustrated primitives (sky stage, clouds, hills,
+           ring badges, bush dividers) so pages read as storybook
+           scenes instead of plain card grids. Built from data-URI SVG
+           and layered CSS shapes — no external image assets needed.
+           ============================================================ */
+
+        .paper-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(180deg, #cfe8f0 0%, #eaf3e6 100%);
+            box-shadow: var(--shadow-soft-lg);
+            padding: 3rem 1.5rem 4.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .paper-stage {
+                padding: 4rem 3rem 5.5rem;
+            }
+        }
+
+        .paper-stage .stage-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .scene-clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='120' viewBox='0 0 420 120'%3E%3Cg fill='%23ffffff' opacity='0.9'%3E%3Cellipse cx='60' cy='72' rx='55' ry='26'/%3E%3Cellipse cx='112' cy='58' rx='38' ry='22'/%3E%3Cellipse cx='270' cy='76' rx='60' ry='24'/%3E%3Cellipse cx='330' cy='60' rx='40' ry='22'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 420px 120px;
+            pointer-events: none;
+        }
+
+        .scene-hills {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 76px;
+            z-index: 2;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='76' viewBox='0 0 600 76'%3E%3Cpath d='M0,42 Q75,14 150,36 T300,32 T450,40 T600,26 L600,76 L0,76 Z' fill='%230f6b66' opacity='0.5'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='76' viewBox='0 0 600 76'%3E%3Cpath d='M0,58 Q100,32 200,52 T400,48 T600,54 L600,76 L0,76 Z' fill='%230f6b66'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 600px 76px;
+            pointer-events: none;
+        }
+
+        .scene-bushes {
+            height: 34px;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='36' viewBox='0 0 72 36'%3E%3Cg%3E%3Ccircle cx='6' cy='20' r='13' fill='%234d7c0f' opacity='0.5'/%3E%3Ccircle cx='36' cy='16' r='15' fill='%234d7c0f' opacity='0.55'/%3E%3Ccircle cx='66' cy='20' r='13' fill='%234d7c0f' opacity='0.5'/%3E%3Ccircle cx='0' cy='25' r='9' fill='%2384cc16' opacity='0.75'/%3E%3Ccircle cx='20' cy='26' r='10' fill='%2384cc16' opacity='0.8'/%3E%3Ccircle cx='48' cy='25' r='10' fill='%2384cc16' opacity='0.8'/%3E%3Ccircle cx='72' cy='26' r='9' fill='%2384cc16' opacity='0.75'/%3E%3Ccircle cx='14' cy='9' r='2.4' fill='%23e08e1d'/%3E%3Ccircle cx='52' cy='7' r='2.4' fill='%23c6402b'/%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(to top, rgba(77, 124, 15, 0.3) 0%, rgba(77, 124, 15, 0.16) 40%, transparent 75%);
+            background-repeat: repeat-x, no-repeat;
+            background-size: 72px 36px, 100% 100%;
+            background-position: bottom center, bottom center;
+        }
+
+        .badge-icon {
+            position: relative;
+            width: 4.25rem;
+            height: 4.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.35rem;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow:
+                0 0 0 6px var(--badge-ring-1, rgba(201, 162, 39, 0.22)),
+                0 0 0 12px var(--badge-ring-2, rgba(201, 162, 39, 0.10)),
+                var(--shadow-soft-sm);
+        }
+
+        .stage-medallion {
+            width: 6rem;
+            height: 6rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--hue-hellenic-gold), var(--hue-vedic-saffron));
+            color: #241a10;
+            font-size: 2rem;
+            box-shadow:
+                0 0 0 8px rgba(255, 255, 255, 0.55),
+                0 0 0 14px rgba(201, 162, 39, 0.18),
+                var(--shadow-soft-md);
+        }
+
+        .tale-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+            box-shadow: var(--shadow-soft-sm);
+        }
+
+        .cast-medallion {
+            width: 3rem;
+            height: 3rem;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            box-shadow:
+                0 0 0 4px var(--badge-ring-1, rgba(201, 162, 39, 0.18)),
+                var(--shadow-soft-sm);
+        }
+
+        .seismo-wave {
+            height: 8rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(#050a05, #0a140a);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+        }
+
+        .seismo-wave::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='128' viewBox='0 0 300 128'%3E%3Cpolyline points='0,64 20,64 28,40 36,90 44,20 52,100 60,64 90,64 98,58 106,70 114,64 150,64 158,30 166,110 174,50 182,80 190,64 230,64 238,45 246,85 254,64 300,64 320,64' fill='none' stroke='%2322c55e' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            background-size: 300px 128px;
+            animation: seismoScroll 3s linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes seismoScroll {
+            from {
+                background-position-x: 0;
+            }
+
+            to {
+                background-position-x: -300px;
+            }
+        }
     </style>
 </head>
 
@@ -289,121 +739,27 @@
                 <div class="flex items-center gap-4">
                     <div id="brand-mark"
                         class="w-12 h-12 bg-slate-900 flex items-center justify-center text-2xl border border-orange-900/20">
-                        <i class="fas fa-mountain" id="logo-icon"></i>
+                        <i class="fas fa-sun" id="logo-icon"></i>
                     </div>
                     <div>
-                        <h1 class="text-3xl font-orbitron font-black tracking-widest text-slate-900 uppercase"
+                        <h1 class="text-3xl font-cinzel font-black tracking-widest text-slate-900 uppercase"
                             id="main-title">
                             ARKADIS
                         </h1>
                     </div>
                 </div>
 
-                <!-- Unveiled Toggle -->
-                <div class="flex items-center gap-3">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter hidden md:block"
-                        id="toggle-label"> </span>
-                    <button id="mode-toggle"
-                        class="toggle-unveiled w-10 h-10 rounded-full flex items-center justify-center border border-gray-200 hover:border-orange-500 transition-all">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </div>
-
-                <!-- Desktop Nav (Scrollable) -->
-                <nav
-                    class="hidden xl:flex items-center gap-6 overflow-x-auto scrollbar-hide whitespace-nowrap mask-linear-fade flex-1 px-4">
-                    <button onclick="switchTab('overview')"
-                        class="nav-btn nav-active px-1 pt-1 text-sm font-medium transition-colors border-b-2 border-transparent hover:border-orange-200"
-                        data-tab="overview">Overview</button>
-                    <button onclick="switchTab('history')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="history">Origins</button>
-                    <button onclick="switchTab('characters')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="characters">Characters</button>
-                    <button onclick="switchTab('stories')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="stories">Stories</button>
-                    <button onclick="switchTab('episodes')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="episodes">Episodes</button>
-                    <button onclick="switchTab('society')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="society">The Order</button>
-                    <button onclick="switchTab('defense')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="defense">Defense</button>
-                    <button onclick="switchTab('flora')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="flora">Flora</button>
-                    <button onclick="switchTab('economy')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="economy">Economy</button>
-                    <button onclick="switchTab('map')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="map">Map</button>
-                    <button onclick="switchTab('daily')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="daily">Daily Life</button>
-                    <button onclick="switchTab('geology')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="geology">Geo-Tech</button>
-                    <button onclick="switchTab('sports')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="sports">Training</button>
-                    <button onclick="switchTab('disasters')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="disasters">Disasters</button>
-                    <button onclick="switchTab('currency')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="currency">Currency</button>
-                    <button onclick="switchTab('wiretap')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="wiretap">Wiretap</button>
-                    <button onclick="switchTab('chess')"
-                        class="nav-btn px-1 pt-1 text-sm font-medium text-gray-500 transition-colors border-b-2 border-transparent hover:border-gray-300"
-                        data-tab="chess">The Game</button>
-                </nav>
+                <!-- Desktop Nav: grouped pill nav + dropdowns, rendered by app.js (see navGroups) -->
+                <nav id="desktop-nav" class="hidden xl:flex items-center"></nav>
 
                 <!-- Mobile Menu Toggle -->
                 <button onclick="document.getElementById('mobile-nav').classList.toggle('hidden')"
-                    class="xl:hidden text-gray-500"><i class="fas fa-bars"></i></button>
+                    class="mobile-nav-toggle xl:hidden"><i class="fas fa-bars"></i></button>
             </div>
         </div>
 
-        <!-- Mobile Nav -->
-        <div id="mobile-nav" class="hidden xl:hidden p-4 grid grid-cols-2 gap-2">
-            <button onclick="switchTab('overview')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Overview</button>
-            <button onclick="switchTab('history')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Origins</button>
-            <button onclick="switchTab('characters')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Characters</button>
-            <button onclick="switchTab('stories')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Stories</button>
-            <button onclick="switchTab('episodes')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Episodes</button>
-            <button onclick="switchTab('society')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">The
-                Order</button>
-            <button onclick="switchTab('defense')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Defense</button>
-            <button onclick="switchTab('flora')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">Flora</button>
-            <button onclick="switchTab('economy')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Economy</button>
-            <button onclick="switchTab('map')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">Map</button>
-            <button onclick="switchTab('daily')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">Daily
-                Life</button>
-            <button onclick="switchTab('geology')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Geo-Tech</button>
-            <button onclick="switchTab('sports')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Training</button>
-            <button onclick="switchTab('disasters')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Disasters</button>
-            <button onclick="switchTab('currency')"
-                class="text-left py-2 px-4 hover:bg-orange-50 rounded">Currency</button>
-            <button onclick="switchTab('chess')" class="text-left py-2 px-4 hover:bg-orange-50 rounded">The
-                Game</button>
-        </div>
+        <!-- Mobile Nav: grouped accordion, rendered by app.js (see navGroups) -->
+        <div id="mobile-nav" class="hidden xl:hidden px-4 pb-4 space-y-1"></div>
     </header>
 
     <!-- Main Content Container -->
@@ -415,7 +771,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 mt-12">
+    <footer class="cultural-footer bg-slate-900 text-slate-400 py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs font-mono">
             <p>ARKADIS INTERNAL NETWORK // EYES ONLY</p>
             <p class="mt-2 text-slate-600">Unauthorized access will trigger Erasure Protocols.</p>

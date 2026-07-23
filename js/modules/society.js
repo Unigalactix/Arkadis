@@ -150,7 +150,7 @@ const characterData = {
 
 const orderIntel = {
     king: {
-        lineage: ["Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Noctis Arcadian", "Founder Arcadian"],
+        lineage: ["Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Noctis Arcadian", "Arkadis the Founder"],
         partners: ["Seraphine V. Valorian (Consort)"],
         affairs: ["Elara Quin (Archived, ended 2016)"]
     },
@@ -225,7 +225,7 @@ const orderIntel = {
         affairs: ["Mira D. Stormwatch (Encrypted contact)"]
     },
     prince: {
-        lineage: ["Claus Arcadian", "Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Founder Arcadian"],
+        lineage: ["Claus Arcadian", "Aelius Arcadian", "Marius Arcadian", "Cassiel Arcadian", "Theron Arcadian", "Vespyr Arcadian", "Arkadis the Founder"],
         partners: ["No declared partner"],
         affairs: ["None detected"]
     }
@@ -270,7 +270,8 @@ export const societyModule = {
                         <h2 class="text-3xl font-bold mb-2">The Arcadian Lineage</h2>
                         <p class="text-slate-300 max-w-2xl">
                             Power in Arkadis is hereditary. The roles pass on through bloodlines only, ensuring loyalty
-                            and continuity of the Founder's vision.
+                            and continuity of Arkadis the Founder's vision, carried for nearly three millennia by the
+                            house that took his name: Arcadian.
                         </p>
                     </div>
                 </div>
@@ -279,9 +280,10 @@ export const societyModule = {
             <div class="space-y-8">
                 <!-- High Level Overview -->
                 <div class="glass-panel p-8 rounded-xl border-l-4 border-orange-600">
-                    <h3 class="text-2xl font-bold mb-4">The Order of 1,500 Years</h3>
+                    <h3 class="text-2xl font-bold mb-4">The Order of Nearly 3,000 Years</h3>
                     <p class="text-gray-700 leading-relaxed mb-4">
-                        Arkadis is not merely a city; it is a meticulously preserved social experiment. The 8 Shadows (Inner Circle) 
+                        Arkadis is not merely a city; it is a meticulously preserved social experiment, a living fusion
+                        of Hellenic reason, Vedic rite, and Byzantine splendor. The 8 Shadows (Inner Circle)
                         act as the architects of global influence, while the 7 Ministers ensure domestic stability within the bio-domes.
                     </p>
                 </div>

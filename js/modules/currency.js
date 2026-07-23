@@ -9,9 +9,11 @@ export const currencyModule = {
                             The World's First Energy-Standard Currency
                         </p>
                     </div>
-                    <div class="text-4xl text-yellow-500"><i class="fas fa-coins"></i></div>
+                    <div class="cast-medallion" style="width:3.5rem;height:3.5rem;font-size:1.3rem;--badge-ring-1: rgba(234,179,8,0.3); background: linear-gradient(135deg, #eab308, #a16207);"><i class="fas fa-coins"></i></div>
                 </div>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Chart Section -->

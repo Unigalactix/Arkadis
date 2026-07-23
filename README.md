@@ -24,6 +24,7 @@ Arkadis/
 |     |- audio.js
 |     |- boot.js
 |     |- characters.js
+|     |- characters_data.js
 |     |- chess.js
 |     |- currency.js
 |     |- daily_life.js
@@ -40,9 +41,7 @@ Arkadis/
 |     |- overview.js
 |     |- society.js
 |     |- stories.js
-|     |- terminal.js
-|     |- training.js
-|     \- wiretap.js
+|     \- training.js
 ```
 
 ## Getting Started

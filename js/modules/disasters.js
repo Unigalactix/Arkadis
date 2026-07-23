@@ -4,11 +4,16 @@ export const disastersModule = {
             <div class="bg-gradient-to-r from-red-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl relative overflow-hidden">
                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
                 <div class="relative z-10">
-                    <h2 class="text-3xl font-bold mb-4 flex items-center gap-3">
-                        <i class="fas fa-house-damage animate-bounce"></i> Tectonic & Disaster Log
-                    </h2>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="cast-medallion" style="width:3.5rem;height:3.5rem;font-size:1.4rem;background: linear-gradient(135deg, #dc2626, #7f1d1d);">
+                            <i class="fas fa-house-damage"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold flex items-center gap-3">
+                            Tectonic & Disaster Log
+                        </h2>
+                    </div>
                     <p class="text-red-200 max-w-3xl border-l-4 border-red-500 pl-4">
-                        The 8th Continent sits on the unstable Rodrigues Triple Junction. Frequent seismic activity is the price we pay for infinite geothermal energy.
+                        The Mysterious Continent sits on the unstable Rodrigues Triple Junction. Frequent seismic activity is the price we pay for infinite geothermal energy.
                         <span class="block mt-2 font-mono text-xs bg-red-950/50 p-2 rounded inline-block text-red-400">CURRENT THREAT LEVEL: ELEVATED</span>
                     </p>
                 </div>
@@ -62,7 +67,7 @@ export const disastersModule = {
                             <span class="text-xs font-mono text-green-500 animate-pulse">● LIVE SENSOR DATA</span>
                             <span class="text-xs font-mono text-slate-500">FREQ: 40Hz</span>
                         </div>
-                        <div class="h-32 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Seismogram.gif')] bg-cover bg-center rounded opacity-80 border border-green-900/30"></div>
+                        <div class="h-32 seismo-wave"></div>
                         <div class="grid grid-cols-3 gap-2 mt-4 text-center font-mono text-xs">
                             <div class="bg-slate-900 p-2 rounded">
                                 <div class="text-slate-500">Magma Depth</div>
