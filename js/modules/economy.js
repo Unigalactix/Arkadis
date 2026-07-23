@@ -2,12 +2,19 @@ export const economyModule = {
     render: () => `
         <div id="economy-section" class="tab-content hidden space-y-8">
             <div class="bg-gradient-to-r from-yellow-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl">
-                <h2 class="text-3xl font-bold mb-4">The Economy of Shadows</h2>
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="cast-medallion" style="width:3.5rem;height:3.5rem;font-size:1.3rem;--badge-ring-1: rgba(202,138,4,0.3); background: linear-gradient(135deg, #ca8a04, #a16207);">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold">The Economy of Shadows</h2>
+                </div>
                 <p class="text-slate-300 max-w-3xl">
                     Arkadis doesn't trade in traditional currency. Our wealth is measured in energy, knowledge, and
                     global influence. We control 23% of the world's financial infrastructure—invisibly.
                 </p>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="space-y-6">

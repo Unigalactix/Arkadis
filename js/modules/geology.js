@@ -3,7 +3,12 @@ export const geologyModule = {
         <div id="geology-section" class="tab-content hidden space-y-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="glass-panel p-6 rounded-xl">
-                    <h2 class="text-2xl font-bold mb-4">The Tectonic Engine</h2>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="cast-medallion" style="width:3.5rem;height:3.5rem;font-size:1.3rem;background: linear-gradient(135deg, var(--hue-vedic-vermilion), var(--hue-byzantine-burgundy));">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">The Tectonic Engine</h2>
+                    </div>
                     <p class="text-gray-700 mb-4">
                         Located at the <strong>Rodrigues Triple Junction</strong> ($25^{\circ}S, 70^{\circ}E$), Arkadis
                         sits on a limitless geothermal power source.

@@ -19,8 +19,8 @@ export const trainingModule = {
             <!-- Hall of Fame / Lore -->
             <div class="glass-panel p-6 rounded-xl border-l-4 border-yellow-500 bg-gradient-to-r from-orange-50 to-white">
                 <div class="flex items-start gap-4">
-                    <div class="bg-yellow-100 p-3 rounded-full text-yellow-700 shadow-inner">
-                        <i class="fas fa-trophy text-2xl"></i>
+                    <div class="cast-medallion" style="width:3.25rem;height:3.25rem;font-size:1.2rem;--badge-ring-1: rgba(234,179,8,0.3); background: linear-gradient(135deg, #eab308, #a16207);">
+                        <i class="fas fa-trophy"></i>
                     </div>
                     <div>
                         <h3 class="text-xl font-bold text-slate-900">Legend of "Mr. Arkadis"</h3>

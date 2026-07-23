@@ -9,7 +9,7 @@ export const floraModule = {
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🌋</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(198, 64, 43, 0.22); --badge-ring-2: rgba(198, 64, 43, 0.10); background: linear-gradient(135deg, var(--hue-vedic-vermilion), var(--hue-byzantine-burgundy)); width:3.5rem; height:3.5rem; font-size:1.6rem;">🌋</div>
                     <h3 class="text-xl font-bold mb-2">Pyro-Ferns</h3>
                     <p class="text-sm text-gray-600">
                         Thermal-resistant vegetation with roots that extend 10m deep. They absorb heat and convert it to
@@ -20,7 +20,7 @@ export const floraModule = {
                 </div>
 
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🌳</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(15, 107, 102, 0.22); --badge-ring-2: rgba(15, 107, 102, 0.10); background: linear-gradient(135deg, var(--hue-byzantine-teal), #0a4744); width:3.5rem; height:3.5rem; font-size:1.6rem;">🌳</div>
                     <h3 class="text-xl font-bold mb-2">Lumina Trees</h3>
                     <p class="text-sm text-gray-600">
                         Bioluminescent trees that glow blue at night. Their sap is harvested for medicinal compounds.
@@ -30,7 +30,7 @@ export const floraModule = {
                 </div>
 
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🦎</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(224, 142, 29, 0.22); --badge-ring-2: rgba(224, 142, 29, 0.10); background: linear-gradient(135deg, var(--hue-vedic-saffron), var(--hue-hellenic-gold)); width:3.5rem; height:3.5rem; font-size:1.6rem;">🦎</div>
                     <h3 class="text-xl font-bold mb-2">Magma Lizards</h3>
                     <p class="text-sm text-gray-600">
                         The only fauna native to Arkadis. These reptiles regulate body temperature via thermal vents and
@@ -41,7 +41,7 @@ export const floraModule = {
                 </div>
 
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🐦</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(100, 116, 139, 0.22); --badge-ring-2: rgba(100, 116, 139, 0.10); background: linear-gradient(135deg, #475569, #1e293b); width:3.5rem; height:3.5rem; font-size:1.6rem;">🐦</div>
                     <h3 class="text-xl font-bold mb-2">Ash Hawks</h3>
                     <p class="text-sm text-gray-600">
                         Genetically modified raptors with heat-vision. Used by the Sentinels for reconnaissance. They
@@ -51,7 +51,7 @@ export const floraModule = {
                 </div>
 
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🌊</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(2, 132, 199, 0.22); --badge-ring-2: rgba(2, 132, 199, 0.10); background: linear-gradient(135deg, #0284c7, #0369a1); width:3.5rem; height:3.5rem; font-size:1.6rem;">🌊</div>
                     <h3 class="text-xl font-bold mb-2">Thermal Kelp</h3>
                     <p class="text-sm text-gray-600">
                         Underwater forests that filter geothermal toxins from the ocean. They create a 50km eco-barrier
@@ -62,7 +62,7 @@ export const floraModule = {
                 </div>
 
                 <div class="glass-panel p-6 rounded-xl hover:shadow-lg transition-shadow">
-                    <div class="text-4xl mb-3">🍄</div>
+                    <div class="badge-icon mb-3" style="--badge-ring-1: rgba(126, 34, 206, 0.22); --badge-ring-2: rgba(126, 34, 206, 0.10); background: linear-gradient(135deg, #7e22ce, #a855f7); width:3.5rem; height:3.5rem; font-size:1.6rem;">🍄</div>
                     <h3 class="text-xl font-bold mb-2">Obsidian Mushrooms</h3>
                     <p class="text-sm text-gray-600">
                         Grow on cooled lava flows. Rich in protein and minerals. Primary food source for 30% of the
@@ -72,6 +72,8 @@ export const floraModule = {
                     </div>
                 </div>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <div class="glass-panel p-6 rounded-xl">
                 <h3 class="text-lg font-bold mb-4">Ecosystem Distribution</h3>

@@ -4,7 +4,7 @@ export const defenseModule = {
             <div class="bg-gradient-to-r from-red-900 to-slate-900 text-white p-8 rounded-xl shadow-2xl">
                 <div class="flex flex-col md:flex-row items-center gap-8">
                     <div
-                        class="w-24 h-24 bg-red-600 rounded-full flex items-center justify-center text-4xl shadow-inner animate-pulse">
+                        class="cast-medallion" style="width:6rem;height:6rem;font-size:2rem;--badge-ring-1: rgba(220,38,38,0.35); background: linear-gradient(135deg, #dc2626, #7f1d1d);">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div>
@@ -54,6 +54,8 @@ export const defenseModule = {
                     </div>
                 </div>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <!-- NEW DEFENSE CONTENT -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

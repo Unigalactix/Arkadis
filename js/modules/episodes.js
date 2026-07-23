@@ -10,11 +10,20 @@ export const episodesModule = {
     render: () => `
         <div id="episodes-section" class="tab-content hidden space-y-8 animate-fade-in pb-24">
             <div class="glass-panel p-8 rounded-xl border-l-4 border-orange-600">
-                <h2 class="text-3xl font-bold mb-2">Episodes // 2027 Conflict Archive</h2>
-                <p class="text-gray-700 leading-relaxed">
-                    Placeholder arc list for 44 episodes. Each entry contains a title and one-line brief so complete stories can be added later.
-                </p>
+                <div class="flex items-start gap-4">
+                    <div class="cast-medallion" style="width:3.25rem;height:3.25rem;font-size:1.2rem;background: linear-gradient(135deg, var(--hue-vedic-vermilion), var(--hue-byzantine-burgundy));">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Episodes // 2027 Conflict Archive</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            60 episodes across nine arcs. The original 44-episode conflict runs 1–44, with 16 flashback episodes physically interspersed at their narrative callback point — natural-calamity precedents (Volcanic Rage, Ice Age, Rise of Land), Reno's "Mister" Arena origin, and the ancient Origins of Secret Society founding arc. Flashback episodes are lettered (e.g. 20A) and marked with a ↩ badge showing which main episode they callback from.
+                        </p>
+                    </div>
+                </div>
             </div>
+
+            <div class="scene-bushes"></div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="episodes-counters"></div>
 
@@ -140,10 +149,13 @@ export const episodesModule = {
             }
 
             gridEl.innerHTML = filtered.map(ep => `
-                <article class="glass-panel p-5 rounded-xl border-l-4 border-slate-300">
+                <article class="glass-panel p-5 rounded-xl border-l-4 ${ep.flashback ? 'border-purple-400' : 'border-slate-300'}">
                     <div class="flex justify-between items-start gap-3 mb-2">
                         <div class="text-[10px] uppercase font-bold tracking-wider text-gray-500">Episode ${ep.no.toString().padStart(2, '0')}</div>
-                        <span class="text-[10px] font-bold uppercase px-2 py-1 rounded-full ${statusClasses[ep.status]}">${ep.status}</span>
+                        <div class="flex gap-1">
+                            ${ep.flashback ? `<span class="text-[10px] font-bold uppercase px-2 py-1 rounded-full bg-purple-100 text-purple-700">\u21a9 Flashback</span>` : ''}
+                            <span class="text-[10px] font-bold uppercase px-2 py-1 rounded-full ${statusClasses[ep.status]}">${ep.status}</span>
+                        </div>
                     </div>
 
                     <h3 class="text-lg font-bold text-slate-900 mb-2">${ep.title}</h3>

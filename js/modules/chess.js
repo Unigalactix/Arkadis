@@ -7,6 +7,8 @@ export const chessModule = {
                     Match your wits against the Archive's tactical AI.</p>
             </div>
 
+            <div class="scene-bushes mb-4"></div>
+
             <div class="flex flex-col lg:flex-row gap-12 items-start justify-center">
                 <!-- BOARD -->
                 <div class="space-y-4">
