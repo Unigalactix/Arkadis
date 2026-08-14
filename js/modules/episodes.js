@@ -45,7 +45,9 @@ export const episodesModule = {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="episodes-grid"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="episodes-grid" aria-busy="true">
+                ${Array.from({ length: 4 }, () => '<div class="content-skeleton" aria-hidden="true"></div>').join('')}
+            </div>
         </div>
     `,
     init: () => {
@@ -217,6 +219,9 @@ export const episodesModule = {
 
         setActiveChip('.arc-chip', 'arc', state.arc);
         setActiveChip('.filter-chip', 'filter', state.filter);
-        renderEpisodes();
+        requestAnimationFrame(() => {
+            renderEpisodes();
+            gridEl.setAttribute('aria-busy', 'false');
+        });
     }
 };

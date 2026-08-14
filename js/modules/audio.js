@@ -3,20 +3,36 @@ export const audioModule = {
     osc: null,
 
     init: () => {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let lastHoveredElement = null;
+        let lastHoverAt = 0;
+
         // Initialize Audio Context on first user interaction to bypass browser policies
         const enableAudio = () => {
             if (!audioModule.ctx) {
                 audioModule.ctx = new (window.AudioContext || window.webkitAudioContext)();
-                console.log("Audio System Initialized");
             }
+            if (audioModule.ctx.state === 'suspended') audioModule.ctx.resume().catch(() => { });
             document.removeEventListener('click', enableAudio);
         };
         document.addEventListener('click', enableAudio);
 
         // Attach listeners to interactive elements
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('button') || e.target.closest('.character-card') || e.target.closest('.nav-btn')) {
-                audioModule.playHover();
+        document.addEventListener('pointerover', (event) => {
+            if (reducedMotion.matches) return;
+            const interactiveElement = event.target.closest('button, .character-card, .nav-btn');
+            if (!interactiveElement || interactiveElement.contains(event.relatedTarget)) return;
+
+            const now = performance.now();
+            if (interactiveElement === lastHoveredElement || now - lastHoverAt < 80) return;
+            lastHoveredElement = interactiveElement;
+            lastHoverAt = now;
+            audioModule.playHover();
+        });
+
+        document.addEventListener('pointerout', (event) => {
+            if (lastHoveredElement && !lastHoveredElement.contains(event.relatedTarget)) {
+                lastHoveredElement = null;
             }
         });
 
