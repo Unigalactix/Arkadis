@@ -114,12 +114,12 @@
 ## 4. AESTHETICS & UI TONE
 
 ### "The Order" (Default Mode)
-- **Colors**: Slate-900 (Dark), Orange-600 (Gold/Power), White Glass.
-- **Font**: Inter (UI) + Playfair Display (Headings/Noble).
-- **Vibe**: Clean, Expensive, authoritarian, Apple-store-meets-Monarchy.
+- **Colors**: Near-black graphite, brushed silver, and translucent liquid-glass highlights.
+- **Font**: `ARKFONT` site-wide, loaded locally from `legacy/ARKFONT-Regular.ttf`.
+- **Vibe**: Professional, cinematic, controlled, and technologically advanced.
 
 ### Storyboard Page Design (CRITICAL - DO NOT REVERT TO "REPORT" LOOK)
-- The site intentionally does NOT look like a dashboard/report. `#main-content` is styled as a single manuscript/storybook "page" (parchment background, layered stacked-page shadow, folded top-right corner) rather than a plain content well.
+- The site intentionally does NOT look like a generic dashboard/report. `#main-content` is a single translucent dark workspace with a fine border, inset highlight, deep shadow, and backdrop blur.
 - Every tab render is prefixed with a numbered `.storyboard-chapter` banner (medallion chapter number + italic chapter label) injected by `chapterMeta`/`switchTab` in `app.js` — do not remove this banner injection or render modules without it.
 - Tab switches trigger a `.animate-page-turn` transition on `#main-content` to reinforce the "turning a page" feel.
 - The removed "Unveiled Mode" toggle (`#mode-toggle`, `body.unveiled-mode`, glitch-text CSS) and the floating "Intercepted Comms" terminal widget (`js/modules/terminal.js`, `#rebel-terminal`) were deliberately deleted — do not re-add them. The rebel faction is still called **"The Unveiled"** in lore/character data (`characters.js`, `episodes_data.js`, `stories.js`) — that faction name is unrelated and must stay.
@@ -127,29 +127,36 @@
 ### Premium Grouped Nav (site-wide, CRITICAL — do not revert to a flat 16-button bar)
 - The header nav is data-driven from `navGroups` in `app.js` (NOT hard-coded in `index.html` — the old flat list of 16 `<button>`s was removed). `index.html` only contains empty containers: `<nav id="desktop-nav">` and `<div id="mobile-nav">`; `renderNav()` (called once from the `DOMContentLoaded` handler, before the initial `switchTab('overview')`) builds both from `navGroups` and wires up open/close + click handlers.
 - `navGroups` has 5 top-level entries: **Overview** (standalone, direct tab), **World** (Origins/Map/Geo-Tech/Flora/Disasters), **Story** (Characters/Stories/Episodes), **Society** (The Order/Defense/Economy/Currency/Daily Life), **Play** (Training/The Game). Each grouped entry has `items: [{ tab, label, icon }]`. If you add a new module/tab, add it to the right group's `items` array (or create a new group) — do not add a 6th flat top-level button.
-- Desktop: `.nav-btn` pills live in a frosted-glass pill bar (`#desktop-nav` — this is the **one deliberate `backdrop-filter: blur()` exception** on the whole site; content cards must stay opaque, but nav chrome is allowed to be glassy). Clicking a group's `.nav-btn` (with `data-group-trigger`) toggles `.nav-group-open` on its parent `.nav-group`, revealing a `.nav-dropdown` panel (opacity/transform transition, not display toggle). A `document`-level click listener closes all open groups; group trigger clicks call `e.stopPropagation()` so they don't immediately self-close.
+- Desktop: `.nav-btn` pills live in a frosted-glass pill bar (`#desktop-nav`) consistent with the site's shared glass surfaces. Clicking a group's `.nav-btn` (with `data-group-trigger`) toggles `.nav-group-open` on its parent `.nav-group`, revealing a `.nav-dropdown` panel (opacity/transform transition, not display toggle). A `document`-level click listener closes all open groups; group trigger clicks call `e.stopPropagation()` so they don't immediately self-close.
 - Mobile: `#mobile-nav` renders the same groups as an accordion (`.mobile-nav-group-header` + `.mobile-nav-sub` with a `max-height` transition) instead of the old 2-column flat button grid.
 - `updateNavActiveStates(tabId)` (called from `switchTab`) is the single source of truth for highlighting: it toggles `.nav-active` on every `[data-tab]` element matching the current tab, toggles `.nav-group-active` on any desktop `.nav-group` containing an active child (so the parent pill also highlights gold), and auto-opens (`.mobile-nav-group-open`) + highlights (`.mobile-nav-group-active`) the mobile accordion group containing the active tab. Do not go back to the old flat `document.querySelectorAll('.nav-btn')` loop that lived directly in `switchTab`.
-- Nav typography is **Inter** (clean modern sans, semi-bold), not Cinzel — Cinzel is reserved for the `ARKADIS` wordmark and page (`h1`/`h2`/`h3`) headings. Each nav entry/sub-item carries a Font Awesome icon for a scannable, modern feel.
+- Nav typography uses the site-wide **ARKFONT** family. Each nav entry/sub-item carries a Font Awesome icon for a scannable, modern feel.
 
-### Paper Diorama Redesign (CRITICAL — the site's current visual identity)
-- The whole site uses a **soft, rounded, layered 3D paper-craft / storybook-diorama** aesthetic (reference: warm flat pastel backgrounds, big rounded corners, soft blurred elevation shadows — like layered paper-cutout illustrations, NOT scrapbook/kraft-paper crafting). An earlier hard-edged "torn kraft paper / ticket-stub" iteration was explicitly rejected by the user for looking too rustic/vintage — do not reintroduce hard 1:1 offset shadows (`Npx Npx 0 rgba(...)` with no blur), dashed "stitched" borders, jagged torn/zigzag edges, perforated-circle edges, or SVG noise-grain textures.
-- Palette lives in `:root` as `--paper-bg`/`--paper-bg-soft` (flat warm cream page background, no gradients/texture), `--paper-card`/`--paper-card-alt` (card fill + the slightly darker tone used for the "peeking layer" trick below), `--ink`/`--ink-soft`/`--ink-faint` (text), `--paper-edge` (hairline borders), `--paper-header-bg` (dark header), and `--shadow-soft-sm/md/lg` (SOFT large-blur, low-opacity elevation shadows — e.g. `0 12px 26px rgba(58,47,34,0.14), 0 3px 8px rgba(58,47,34,0.10)`). Radii are large: `--radius-sm/md/lg` = 12/20/28px.
-- Fonts: **Lora** (body copy), **Cinzel** (h1/h2/h3), **Playfair Display** (`.serif` accent), **Caveat** (handwritten accent font for `.paper-tag` quotes/annotations). Inter is used for nav (see above) plus general UI; Orbitron remains loaded for legacy/minor usage (`training.js`'s `.font-orbitron`). Note: `#main-tagline` (a Caveat tagline under the ARKADIS wordmark) was added then explicitly removed by the user — do not re-add it.
-- `.glass-panel` (the primary card wrapper across nearly every module) is an **opaque, softly-elevated rounded card**: `var(--paper-card)` fill, no border, `box-shadow: 0 6px 0 -2px var(--paper-card-alt), var(--shadow-soft-md)` (a solid-color "peeking paper layer" strip *plus* a soft blurred elevation shadow — this combo is what sells the layered-paper-diorama look), lifts on `:hover` (`translateY(-5px)`), trinity-gradient ribbon top edge retained (still animates via `trinityShimmer`). Do not add hard offset shadows or `backdrop-filter` back to it.
-- `#main-content` uses the same peeking-layer + soft-shadow combo (no folded page corner, no perforated edge — those were removed as part of the correction above).
-- `.torn-divider` is now a soft dotted/confetti-style divider (`radial-gradient` circles, NOT a jagged zigzag) — a row of small gold dots between sections. **Superseded by `.scene-bushes` (see below) as the primary section-break motif; `.torn-divider`'s CSS rule is kept for backward compatibility but no module uses it anymore.**
-- `body`'s background is a **flat** warm cream (`var(--paper-bg)`) — no radial-gradient glow, no noise texture. Keep it simple/flat per the reference aesthetic.
+### Dark Liquid Glass Redesign (CRITICAL — the site's current visual identity)
+- The whole site uses a **professional dark liquid-glass** aesthetic: a near-black graphite canvas with a subtle architectural grid, translucent refractive surfaces, bright directional rims, layered specular highlights, inset depth, and restrained silver caustics. Do not restore the retired cream paper-diorama palette or the flatter, uniformly frosted glassmorphism treatment.
+- Palette and surface tokens live in `index.html`'s `:root`: `--paper-bg`/`--paper-bg-soft` hold the dark canvas colors; `--ink`/`--ink-soft`/`--ink-faint` provide the light text hierarchy; `--liquid-surface`, `--liquid-surface-strong`, `--liquid-rim`, `--liquid-depth`, `--liquid-blur`, and `--liquid-refraction` define the refractive material; and `--shadow-soft-sm/md/lg` provide atmospheric depth.
+- `.glass-panel`, `#main-content`, `.site-header`, `.cultural-footer`, `#desktop-nav`, `.nav-dropdown`, and `.paper-stage` share translucent layered backgrounds, 30-36px backdrop blur, specular borders, and inset edge depth. `.glass-panel::after` supplies a slow directional caustic, while `prefers-reduced-motion` disables decorative animation.
+- Active navigation uses a bright silver liquid capsule with dark text. Preserve sufficient contrast across every gradient stop.
 
-### Paper Diorama Scene Kit (rolled out across all 6 phases — the illustrated-storytelling primitives)
-- **`.paper-stage`**: a full-bleed "sky diorama" hero container (sky-to-mint gradient background) with `.scene-clouds` (floating white cloud shapes, absolute-positioned top band) and `.scene-hills` (two-tone layered teal hill silhouettes, absolute-positioned bottom band) as children, plus a `.stage-content` wrapper (z-index 3) for the actual heading/copy/chips. Currently used on the **Overview** hero only — this is the flagship/landing treatment, not meant to be repeated on every page (would dilute the effect).
-- **`.scene-bushes`**: a repeating small-bush-and-flower-dot SVG strip used as the standard **section divider** across pages (Characters, Stories, Episodes, History, Flora, Defense, Economy, Currency, Daily Life, Chess) — this is the go-to divider for any new section break; prefer it over a plain `<hr>` or gradient bar.
+### Smooth Navigation & Interaction (CRITICAL)
+- `window.switchTab(id, options)` is a hash/history-aware router. Tab routes use `#tab-id`, browser Back/Forward is supported, and each tab's scroll position is stored in `sessionStorage` and restored when revisited. Do not replace this with unconditional smooth scrolling to the top.
+- Normal tab switches are synchronous and must not show the full-screen rotating-logo loading overlay. Heavy regions use localized `.content-skeleton` placeholders with `aria-busy`; Characters waits for Mermaid completion and Episodes/Characters let the skeleton paint for one frame before building their grids.
+- Grouped navigation keeps `aria-expanded`, `aria-hidden`, and `inert` synchronized with visual open state. Desktop groups support Arrow Up/Down and Escape; closed panels must not remain in the tab order. Tab changes focus the new page heading without changing restored scroll position.
+- `prefers-reduced-motion` disables page-turn/fade, caustic, ticker, and skeleton animations. Mobile liquid glass uses an 18px blur and no moving caustic to reduce GPU cost.
+- Chess sounds are synthesized locally with Web Audio; do not restore remote chess audio URLs. Shared hover audio is debounced and suppressed for reduced-motion users.
+- The mobile news ticker occupies a real 2rem layout slot with no negative margins. Desktop keeps the fixed ticker and reserves matching body bottom padding.
+- A legacy Tailwind compatibility layer at the end of `index.html` remaps old light text/background/border utilities to the dark tokens. Preserve semantic status colors and intentionally dark tactical panels.
+- Chart.js defaults and Mermaid theme variables are centralized in `js/app.js` so canvas labels, tooltips, grids, and diagrams match the dark theme without duplicating settings in every module.
+
+### Dark Glass Scene Kit
+- **`.paper-stage`**: retained as the Overview hero API, but now renders a dark gridded glass field. `.scene-clouds` and `.scene-hills` remain in markup for compatibility and render as restrained gold/Trinity accent lines, not illustrations.
+- **`.scene-bushes`**: retained as the shared section-divider API, but now renders as a 1px teal-to-gold light line rather than foliage.
 - **`.badge-icon`**: a circular icon badge with two concentric ring shadows (`--badge-ring-1`/`--badge-ring-2` CSS custom props set inline per usage for color) plus `--shadow-soft-sm` — used for feature/category icons that need the "layered ring" look (Overview feature cards, Flora species cards). Larger than `.cast-medallion` (default 4.25rem).
 - **`.cast-medallion`**: a smaller circular badge (default 3rem, freely resized via inline `width`/`height`/`font-size`) used for **page-header icons** (Defense, Economy, Currency, Training, Daily Life, Disasters, History, Geology, Episodes) and for **Characters roster portraits** (shows the character's first initial, color keyed to `priority` via `priorityMedallionBg` in `characters.js`). Set `--badge-ring-1` inline to tint the ring to match the page's accent color.
 - **`.tale-number`**: a small circular numbered badge (Cinzel bold, colored gradient background) used only in `stories.js` to number each of the 12 tales 01–12, turning the grid into a numbered anthology. Keep new stories numbered sequentially if more are added.
 - **`.stage-medallion`**: the large (6rem) sun/emblem badge with a white-ring halo, used once on the Overview hero (`fas fa-sun`) — do not reuse elsewhere, it's meant to be a singular focal emblem.
 - **`.seismo-wave`**: a pure-CSS/SVG animated scrolling seismograph line (replaces a previously broken external Wikipedia GIF dependency in `disasters.js`) — prefer this data-URI SVG + `@keyframes` pattern over any external image URL for animated diagrams; external asset URLs have previously failed to load (`ERR_BLOCKED_BY_ORB`).
-- **Rollout status by module** (all in the current build): Overview = full `.paper-stage` hero + badge-icon features; Characters/Stories/Episodes = medallions + `.scene-bushes` (Phase 3); History/Flora/Geology/Disasters = medallions + `.scene-bushes` + (Disasters) `.seismo-wave` (Phase 4); Defense/Economy/Currency/Training/Chess/Daily Life = medallions + `.scene-bushes` (Phase 5). **`Map.js` and `Society.js` were deliberately left with their existing dark-tech / chess-piece identity** (satellite HUD and RPG card modal respectively) rather than force-fitting the diorama scene kit — both already read as cohesive "framed diorama panels" via the shared `.glass-panel`/rounded-corner/soft-shadow system without needing clouds/hills/bushes, and `society.js` has locked rules (Section 1) around its chess/modal/tilt logic that should not be disturbed for re-theming.
+- **Rollout status**: all modules inherit the dark compatibility layer and shared glass surfaces. `Map.js` and `Society.js` retain their tactical/chess identities and locked behavior while participating in the same palette.
 
 ---
 
@@ -164,8 +171,8 @@
 
 ## 6. SPECIAL MODULES (PREMIUM UPGRADE)
 *   **Cinematic Boot (`boot.js`)**:
-    *   **Behavior**: BIOMETRIC CAMERA SCAN. Runs once per session.
-    *   **Features**: Scrolling logs, "Retina Scan" overlay, Fallback logic.
+  *   **Behavior**: Plays `legacy/rotate_logo_3d.mp4` as a full-screen launch splash once per session. No camera access or face verification.
+  *   **Features**: Natural video-end dismissal with a timeout fallback, a reusable loading overlay reserved for genuinely asynchronous blocking operations, and the same visual identity on `404.html`. Normal tab navigation does not use the full-screen loading overlay.
 *   **Audio Manager (`audio.js`)**:
     *   **Sounds**: UI interactions (Click, Hover) + "Unveiled" Alarm drone.
 *   **Holographic Cards (`society.js`)**:
@@ -180,5 +187,6 @@
   *   **Status**: Deleted entirely (`js/modules/wiretap.js` removed, nav button removed, `app.js` references removed). Do not re-add — it duplicated the surveillance theme already covered by `terminal.js`'s removal note above.
 
 ## 7. ASSET MANIFEST
-*   **Favicon**: `favicon.png` (Stylized 'A' - Gold/Slate).
+*   **Logo + Favicon**: `legacy/logo.png` (silver Arkadis "A" mark). Used in the header, boot identity, and browser favicon.
+*   **Splash Video**: `legacy/rotate_logo_3d.mp4` (silent 4-second rotating logo). Used for launch, loading transitions, and the 404 page.
 *   **Images**: All sourced from Unsplash or generated. No placeholders.

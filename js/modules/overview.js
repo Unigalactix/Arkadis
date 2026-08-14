@@ -11,7 +11,7 @@ export const overviewModule = {
                     <h1 class="text-4xl md:text-5xl font-bold text-slate-900">The Mysterious Continent</h1>
                     <p class="max-w-2xl mx-auto text-lg text-slate-800 font-medium leading-relaxed">
                         Hidden from the global map, Arkadis is a technologically superior society built on a landmass half
-                        the size of Australia &mdash; a nearly 3,000-year fusion of Hellenic reason, Vedic cosmology, and
+                        the size of Australia - a nearly 3,000-year fusion of Hellenic reason, Vedic cosmology, and
                         Byzantine splendor. We are the silent architects of history, operating from the shadows of the
                         Indian Ocean.
                     </p>

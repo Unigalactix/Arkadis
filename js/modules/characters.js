@@ -39,7 +39,7 @@ export const charactersModule = {
                 <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center gap-2">
                     <i class="fas fa-sitemap text-orange-600"></i> Family & Bloodline Tree
                 </h3>
-                <div id="family-tree" class="mermaid flex justify-center bg-white p-4 rounded-xl min-h-[280px]">
+                <div id="family-tree" class="mermaid is-loading flex justify-center bg-white p-4 rounded-xl min-h-[280px]" aria-busy="true">
                     graph TD
                     FOUNDER[Arkadis the Founder]
                     CLAUS[Claus Arcadian]
@@ -71,7 +71,7 @@ export const charactersModule = {
                 <h3 class="text-xl font-bold mb-6 text-slate-800 flex items-center gap-2">
                     <i class="fas fa-network-wired text-orange-600"></i> Relationship & Influence Web
                 </h3>
-                <div id="relationship-map" class="mermaid flex justify-center bg-white p-4 rounded-xl min-h-[420px] overflow-x-auto">
+                <div id="relationship-map" class="mermaid is-loading flex justify-center bg-white p-4 rounded-xl min-h-[420px] overflow-x-auto" aria-busy="true">
                     graph TD
                     CLAUS2[Claus Arcadian]
                     SERAPHINE2[Seraphine V. Valorian]
@@ -146,7 +146,9 @@ export const charactersModule = {
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="characters-grid"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="characters-grid" aria-busy="true">
+                    ${Array.from({ length: 6 }, () => '<div class="content-skeleton" aria-hidden="true"></div>').join('')}
+                </div>
             </div>
 
             <!-- UNVEILED MANDATE CALLOUT -->
@@ -165,8 +167,19 @@ export const charactersModule = {
         </div>
     `,
     init: () => {
+        const diagramElements = [...document.querySelectorAll('#characters-section .mermaid')];
+        const finishDiagrams = () => diagramElements.forEach(diagram => {
+            diagram.classList.remove('is-loading');
+            diagram.setAttribute('aria-busy', 'false');
+        });
+
         if (window.mermaid) {
-            mermaid.contentLoaded();
+            const renderDiagrams = mermaid.run
+                ? mermaid.run({ nodes: diagramElements })
+                : Promise.resolve(mermaid.contentLoaded());
+            Promise.resolve(renderDiagrams).catch(() => { }).finally(finishDiagrams);
+        } else {
+            finishDiagrams();
         }
 
         const countersEl = document.getElementById('character-counters');
@@ -299,6 +312,9 @@ export const charactersModule = {
 
         setActiveChip('.priority-chip', 'priority', state.priority);
         setActiveChip('.context-chip', 'context', state.context);
-        renderGrid();
+        requestAnimationFrame(() => {
+            renderGrid();
+            gridEl.setAttribute('aria-busy', 'false');
+        });
     }
 };
